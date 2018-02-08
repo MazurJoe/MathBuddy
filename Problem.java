@@ -31,7 +31,7 @@ public class Problem
      * @param p
      * @param ops 
      */
-    public Problem(ProblemType p, ArrayList<String> ops)
+    public Problem(ProblemType p, ArrayList<Operations> ops)
     {
         problemType = p;
         problem = problemType.generateProblem(ops);

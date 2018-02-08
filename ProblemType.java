@@ -10,7 +10,6 @@ import java.util.ArrayList;
  */
 public interface ProblemType 
 {
-    public String generateProblem(ArrayList<String> ops);
-    public void readOps(ArrayList<String> ops);
+    public String generateProblem(ArrayList<Operations> ops);
     public String generateCorrectAnswer();
 }

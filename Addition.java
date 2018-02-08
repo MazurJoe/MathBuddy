@@ -10,33 +10,37 @@ package mathbuddy;
 
 public class Addition implements Operations
 {
-    
+    public double t;
     public String s;
     public double temp = 0;
     
-//    public Addition()
-//    {
-//        
-//    }
+    public Addition()
+    {
+        t = RAN.nextInt(101);
+    }
     
     @Override
-    public String createString()
+    public Double createString()
     {
         s = "";
-        temp = RAN.nextInt(101);
-        s += temp;
-        return s;
+        s += t;
+        temp += t;
+        return t;
     }
     
     @Override
-    public String add()
-    {
-        double t = RAN.nextInt(101);
+    public Double add()
+    {   
         temp += t;
         s += " + " + t;
-        return " + " + t;
+        return t;
     }
     
+    @Override
+    public double performOperation(double in)
+    {
+        return in + t;
+    }
     
     @Override
     public double getAnswer()

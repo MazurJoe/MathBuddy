@@ -7,12 +7,12 @@ package mathbuddy;
  * @version 0.0.1
  */
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MathBuddy 
 {
+    //Purely for testing, NOT FINAL CODE
     public static void main(String[] args) 
     {
         Scanner console = new Scanner(System.in);
@@ -22,7 +22,7 @@ public class MathBuddy
         int p = 0;
         int problemLength;
         int i;
-        ArrayList<String> operations = new ArrayList();
+        ArrayList<Operations> operations = new ArrayList();
         while(menu != 0)
         {
             menu = menuHome();
@@ -38,23 +38,27 @@ public class MathBuddy
                         problemLength = console.nextInt();
                         System.out.println();
                     }
-                    
+                    choice = -1;
                     while(choice != 0)
                     {
                         choice = menuChoice();
                         switch(choice)
                         {
                             case 1: //addAdditionOp
-                                operations.add("ADDITION");
+                                operations.add(new Addition());
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
+                                {
                                     choice = 0;
+                                    p = 0;
+                                }
                             break;
                         }
                     }// end of problem creation switch
                     Problem tempProblem = new Problem(new Basic(), operations);
                     problems.add(tempProblem);
+                    operations = new ArrayList();
                     break;
                     
                 case 2: //Start session
@@ -103,7 +107,6 @@ public class MathBuddy
                 return option;
             }
         }while(true);
-        
     }
     
     /**

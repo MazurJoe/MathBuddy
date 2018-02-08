@@ -8,7 +8,6 @@ package mathbuddy;
  */
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Basic implements ProblemType
 {
@@ -17,46 +16,23 @@ public class Basic implements ProblemType
     private String p;
     public double answer;
     
-//    public Basic()
-//    {
-//        
-//    }
-    
     @Override
-    public String generateProblem(ArrayList<String> ops)
+    public String generateProblem(ArrayList<Operations> ops)
     {
-        readOps(ops);
-        Scanner fi;
-        p = operations.get(0).createString();
-        fi = new Scanner(p);
-        fi.useDelimiter("[^\\p{Alnum},\\.-]");
-        if (fi.hasNextInt())
-            answer += fi.nextInt();
-        else if (fi.hasNextDouble())
-            answer += fi.nextDouble();
-        String temp;
-        for(int i = 1; i < operations.size(); i++)
+        nums.add(ops.get(0).createString());
+        p = "" + nums.get(0);
+        answer += nums.get(0);
+        int i;
+        for(i = 1; i < ops.size(); i++)
         {
-            temp = operations.get(i).add();
-            fi = new Scanner(temp.substring(3));
-            fi.useDelimiter("[^\\p{Alnum},\\.-]");
-            if (fi.hasNextInt())
-                answer += fi.nextInt();
-            else if (fi.hasNextDouble())
-                answer += fi.nextDouble();
-            p += temp;
+            if(ops.get(i).getClass().isInstance(new Addition()))   
+            {
+                nums.add(ops.get(i).add());
+                p += " + " + nums.get(i);
+                answer = ops.get(i).performOperation(answer);
+            }
         }
         return p;
-    }
-
-    @Override
-    public void readOps(ArrayList<String> ops)
-    {
-        for(int i = 0; i < ops.size() ; i++)
-        {
-            if(ops.get(i).equals("ADDITION"))
-                operations.add(new Addition());
-        }
     }
 
     @Override

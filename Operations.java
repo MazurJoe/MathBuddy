@@ -11,7 +11,8 @@ import java.util.Random;
 public interface Operations 
 {
     public Random RAN = new Random(System.currentTimeMillis());
-    public String createString();
+    public Double createString();
     public double getAnswer();
-    public String add();
+    public Double add();
+    public double performOperation(double in);
 }
