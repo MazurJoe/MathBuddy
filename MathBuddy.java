@@ -3,7 +3,7 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 02-07-2018
+ * @since 02-08-2018
  * @version 0.0.1
  */
 
@@ -46,6 +46,36 @@ public class MathBuddy
                         {
                             case 1: //addAdditionOp
                                 operations.add(new Addition());
+                                //check to end problem creation
+                                p++;
+                                if(p == problemLength)
+                                {
+                                    choice = 0;
+                                    p = 0;
+                                }
+                            break;
+                            case 2: //addSubtractionOp
+                                operations.add(new Subtraction());
+                                //check to end problem creation
+                                p++;
+                                if(p == problemLength)
+                                {
+                                    choice = 0;
+                                    p = 0;
+                                }
+                            break;
+                            case 3: //addMultiplicationOp
+                                operations.add(new Multiplication());
+                                //check to end problem creation
+                                p++;
+                                if(p == problemLength)
+                                {
+                                    choice = 0;
+                                    p = 0;
+                                }
+                            break;
+                            case 4: //addDivisionOp
+                                operations.add(new Division());
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -122,11 +152,14 @@ public class MathBuddy
             System.out.println("MATHBUDDY - CREATE BASIC PROBLEM     ");
             System.out.println("=====================================");
             System.out.println("[1] Addition extend");
+            System.out.println("[2] Subtaction extend");
+            System.out.println("[3] Multiplication extend");
+            System.out.println("[4] Division extend");
             //System.out.println("[0] Delete");
             System.out.println("=====================================");
             System.out.printf("Select an option: ");
             option = console.nextInt();
-            if (option < 1 || option > 1)
+            if (option < 1 || option > 4)
             {
                 System.out.println("Invalid option...Try again");
                 System.out.println();
