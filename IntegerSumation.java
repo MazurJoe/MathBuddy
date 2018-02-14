@@ -71,12 +71,12 @@ public class IntegerSumation
       * takes the numbers from the private ArrayList coeffs and calculates them added together 
       * @return sum
       */
-    public double addCalculator()
+    public int addCalculator()
     {
-        double sum = 0;
+        int sum = 0;
         for(int i = 0; i < coeffs.size(); i++ )
         {
-            sum+= coeffs.get(i)*1.0;
+            sum+= coeffs.get(i);
         }
         return sum;
     }
@@ -147,9 +147,9 @@ public class IntegerSumation
       * takes the numbers from the private ArrayList and subtracts the second number from the first
       * @return the difference 
       */
-    public double subtractCalculator()
+    public int subtractCalculator()
     {
-        return coeffs.get(0)*1.0 - coeffs.get(1)*1.0;      
+        return coeffs.get(0) - coeffs.get(1);      
     }
 
      /**

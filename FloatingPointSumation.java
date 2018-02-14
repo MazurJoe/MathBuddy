@@ -18,7 +18,7 @@ public class FloatingPointSumation
         Random generator = new Random(System.currentTimeMillis());
         for(int i = 0; i < generator.nextInt(2)+2; i++)
         {
-            coeffs.add(10*generator.nextFloat());
+            coeffs.add(generator.nextFloat());
         }  
     }
     
@@ -30,7 +30,7 @@ public class FloatingPointSumation
         Random generator = new Random(System.currentTimeMillis());
         for(int i = 0; i < generator.nextInt(2)+2; i++)
         {
-            coeffs.add(100*generator.nextFloat());
+            coeffs.add(10*generator.nextFloat());
         }    
     }
      
@@ -42,7 +42,7 @@ public class FloatingPointSumation
         Random generator = new Random(System.currentTimeMillis());
         for(int i = 0; i < generator.nextInt(2)+2; i++)
         {
-            coeffs.add(1000*generator.nextFloat());
+            coeffs.add(100*generator.nextFloat());
         }
     }
     

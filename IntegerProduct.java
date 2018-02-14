@@ -49,7 +49,7 @@ public class IntegerProduct
      * uses the numbers from the private ArrayList coeffs and forms a multiplication equation
      * @return equation
      */
-    public String numMultEquation()
+    public String intMultEquation()
     {
         String equation = "";
         for(int i = 0; i < coeffs.size()-1; i++)
@@ -63,9 +63,9 @@ public class IntegerProduct
      * takes the numbers from the private ArrayList coeffs and multiples them together
      * @return prod
      */
-    public double multCalculator()
+    public int intMultCalculator()
     {
-        double prod = 1.0;
+        int prod = 1;
         for(int i = 0; i < coeffs.size(); i++)
         {
             prod *= coeffs.get(i); 
@@ -128,7 +128,7 @@ public class IntegerProduct
      */
     public double intDivideCalculator()
     {
-        return ((coeffs.get(0)*1.0)/coeffs.get(1));   
+        return (coeffs.get(0)/coeffs.get(1));   
     }
      
     /**
