@@ -3,7 +3,7 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 02-08-2018
+ * @since 02-14-2018
  * @version 0.0.1
  */
 
@@ -28,18 +28,17 @@ public class Problem
     
     /**
      * Constructor for problem.
-     * @param p
-     * @param ops 
+     * @param ops
      */
-    public Problem(ProblemType p, ArrayList<Operations> ops)
+    public Problem(ProblemType p, ArrayList<Character> ops, int length, int digit)
     {
         problemType = p;
-        problem = problemType.generateProblem(ops);
-        correctAnswer = problemType.generateCorrectAnswer();
+        problem = problemType.generateProblem(ops, length, digit);
+        correctAnswer = problemType.generateCorrectAnswer(0);
     }
     
     /**
-     * Prints correct answer.
+     * Prints the correct answer.
      */
     public void displayCorrectAnswer()
     {
@@ -49,7 +48,7 @@ public class Problem
     /**
      * Prints the problem.
      */
-    public void display()
+    public void displayProblem()
     {
         System.out.print(problem);
     }
