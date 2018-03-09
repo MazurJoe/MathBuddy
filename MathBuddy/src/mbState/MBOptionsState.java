@@ -5,14 +5,25 @@
  */
 package mbState;
 
+import frontEndUI.MBOptionsMenu;
+import mathbuddy.MathBuddy;
+
 /**
  *
  * @author John Rosser
  */
 public class MBOptionsState implements MBState{
+    
+    MathBuddy mb;
+    
+    public MBOptionsState(MathBuddy mb) {
+        this.mb = mb;
+    }
 
     @Override
     public void update() {
+        MBOptionsMenu mbo = new MBOptionsMenu(mb);
+        mbo.setVisible(true);
     }
     
 }

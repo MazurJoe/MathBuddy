@@ -5,15 +5,30 @@
  */
 package mbState;
 
+import frontEndUI.MBSplash;
+import mathbuddy.MathBuddy;
+
 /**
  *
  * @author John Rosser
  */
 public class MBMainMenuState implements MBState {
       
+    MathBuddy mb;
+    
+    public MBMainMenuState(MathBuddy mb) {
+        this.mb = mb;
+    }
+    
     
     @Override
     public void update() {
+        MBSplash mbs = new MBSplash(mb);
+        mbs.setVisible(true);
+        //Find the studentID of the given ID
+        //getStudent(id);
+        
+        
         
     }
     

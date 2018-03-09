@@ -14,19 +14,21 @@ import mbState.MBState;
  */
 public class MathBuddy {
 
-    MBState state;   
+    public MBState state;   
     
+    public void setState(MBState state) {
+        this.state = state;
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MBState state = new MBMainMenuState();
-        while(true) {
-            state.update();
-        }
+        MathBuddy mb = new MathBuddy();
         
+        mb.setState(new MBMainMenuState(mb));
+        mb.state.update();
         
     }
     
