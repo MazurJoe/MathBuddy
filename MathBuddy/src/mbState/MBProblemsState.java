@@ -5,15 +5,26 @@
  */
 package mbState;
 
+import frontEndUI.ProblemScreen;
+import mathbuddy.MathBuddy;
+
 /**
  *
  * @author John Rosser
  */
 public class MBProblemsState implements MBState{
+    
+    MathBuddy mb;
+    
+    public MBProblemsState(MathBuddy mb){
+        this.mb = mb;
+    }
 
     @Override
     public void update() {
-
+        ProblemScreen ps = new ProblemScreen();
+        ps.setVisible(true);
+        
     }
     
 }

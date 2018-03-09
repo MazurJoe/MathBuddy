@@ -5,17 +5,31 @@
  */
 package frontEndUI;
 
+import java.awt.event.ActionListener;
+import mathbuddy.MathBuddy;
+import observers.OKObserver;
+
 /**
  *
  * @author John Rosser
  */
 public class MBOptionsMenu extends javax.swing.JFrame {
 
+    
+    ActionListener al;
+    MathBuddy mb;
     /**
      * Creates new form MBOptionsMenu
      */
-    public MBOptionsMenu() {
+    public MBOptionsMenu(MathBuddy mb) {
         initComponents();
+        this.mb = mb;
+        this.al = new OKObserver(this,mb);
+        this.Submit.addActionListener(al);
+    }
+    
+    public void buildOptions() {
+        //record all of the options and get ready to go.
     }
 
     /**
@@ -52,7 +66,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Select Options");
         setName("MBOptions"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(513, 320));
+        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
 
         Submit.setText("OK!");
@@ -302,37 +316,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MBOptionsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MBOptionsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MBOptionsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MBOptionsMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MBOptionsMenu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox Addition;
