@@ -15,7 +15,7 @@ public interface ProblemType
      * @param ops
      * @return
      */
-    public String generateProblem(ArrayList<Character> ops, int length, int digit);
+    public String generateProblem(ArrayList<Character> ops,ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit);
     
     /**
      * 
@@ -27,5 +27,5 @@ public interface ProblemType
      * @param ops
      * @return 
      */
-    public String generateCorrectAnswer(int pos);
+    public String generateCorrectAnswer();
 }

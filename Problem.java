@@ -30,11 +30,11 @@ public class Problem
      * Constructor for problem.
      * @param ops
      */
-    public Problem(ProblemType p, ArrayList<Character> ops, int length, int digit)
+    public Problem(ProblemType p, ArrayList<Character> ops, ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit)
     {
         problemType = p;
-        problem = problemType.generateProblem(ops, length, digit);
-        correctAnswer = problemType.generateCorrectAnswer(0);
+        problem = problemType.generateProblem(ops, parStart, parEnd, length, digit );
+        correctAnswer = problemType.generateCorrectAnswer();
     }
     
     /**

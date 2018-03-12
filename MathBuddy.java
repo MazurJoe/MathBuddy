@@ -10,34 +10,159 @@ package mathbuddy;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Random;
 
 public class MathBuddy 
 {
-//    public Problem generateRanProb(ProblemType probType, int dig,int l)
-//    {
-//        Problem problem = new Problem(probType);
-//        ArrayList<Operations> = new ArrayList();
-//        
-//        
-//        return problem;
-//    }
+    static Random ran = new Random(System.currentTimeMillis());
     
+    public static Problem generateRanIntProb(ProblemType probType, int dig,int l)
+    {
+        int choice = -1;
+        int i;
+        
+        int p = 0;
+        int problemLength = l;
+        
+        ArrayList<Character> operations = new ArrayList();
+        ArrayList<Integer> parenthesesStart = new ArrayList();
+        ArrayList<Integer> parenthesesEnd = new ArrayList();
+        
+        int digit = dig;
+        int parenthesesCheck = 0;
+        int parenthesesEnds = 0;
+        int temp = -1;
+        problemLength--;
+        while(temp != 0)
+        {
+            temp = ran.nextInt(7) + 1;
+                switch(temp)
+                {
+                    case 1: //addAdditionOp
+                        operations.add('+');
+                        System.out.println("add +");
+                        //check to end problem creation
+                        p++;
+                        if(p == problemLength)
+                        {
+                            temp = 0;
+                            p = 0;
+                        }
+                        break;
+                            
+                    case 2: //addSubtractionOp
+                        operations.add('-');
+                        System.out.println("add -");
+                        //check to end problem creation
+                        p++;
+                        if(p == problemLength)
+                        {
+                            temp = 0;
+                            p = 0;
+                        }
+                        break;
+                            
+                    case 3: //addMultiplicationOp
+                        operations.add('*');
+                        System.out.println("add *");
+                        //check to end problem creation
+                        p++;
+                        if(p == problemLength)
+                        {
+                            temp = 0;
+                            p = 0;
+                        }
+                        break;
+                            
+                    case 4: //addDivisionOp
+                        operations.add('/');
+                        System.out.println("add /");
+                        //check to end problem creation
+                        p++;
+                        if(p == problemLength)
+                        {
+                            temp = 0;
+                            p = 0;
+                        }
+                    break;
+                            
+                    case 5: //addPowerOp
+                        operations.add('^');
+                        System.out.println("add ^");
+                        //check to end problem creation
+                        p++;
+                        if(p == problemLength)
+                        {
+                            temp = 0;
+                            p = 0;
+                        }
+                    break;
+                            
+                    case 6: //addParenthesesStart
+                        if(parenthesesCheck != 1 )
+                        {
+                            operations.add('(');
+                            System.out.println("add (");
+                            parenthesesStart.add(p);
+                            parenthesesCheck++;
+                        }
+                    break;    
+
+                    case 7: //addParenthesesEnd
+                        
+                        if(parenthesesEnds != 1 && operations.size() - 1 > 0 && operations.get(operations.size()-1).charValue() != '(')
+                        {
+                            if(parenthesesCheck > parenthesesEnds)
+                            {
+                            System.out.println("add )");
+                            operations.add(')');
+                            parenthesesEnd.add(p);
+                            parenthesesEnds++;
+                            }
+                        }
+                        break;
+                }
+            }// end of problem creation switch
+                    
+            if(parenthesesEnds < parenthesesCheck)
+            {
+                operations.add(')');
+                parenthesesEnd.add(problemLength -1);
+            }
+                    
+            Problem tempProblem = new Problem(new Basic(), operations, parenthesesStart, parenthesesEnd, problemLength + 1 , digit);
+        
+                    
+                    
+        return tempProblem;
+    }
+        
+        
+    
+
+
     //Purely for testing, NOT FINAL CODE
     public static void main(String[] args) 
     {
         Scanner console = new Scanner(System.in);
         int menu = -1;
         int choice = -1;
+        int i;
+        
         ArrayList<Problem> problems = new ArrayList();
+        
         int p = 0;
         int problemLength;
-        int i;
+        
         ArrayList<Character> operations = new ArrayList();
-        ArrayList<Operations> pOperations = new ArrayList();
-        ArrayList<ArrayList<Operations>> parentheses = new ArrayList();
-        int pChoice;
+        ArrayList<Integer> parenthesesStart = new ArrayList();
+        ArrayList<Integer> parenthesesEnd = new ArrayList();
+        
+        int temp;
         int digit;
         int parenthesesCheck = 0;
+        int parenthesesEnds = 0;
+        
         while(menu != 0)
         {
             menu = menuHome();
@@ -65,7 +190,6 @@ public class MathBuddy
                         digit = console.nextInt();
                         System.out.println();
                     }
-                    
                     choice = -1;
                     problemLength--;
                     while(choice != 0)
@@ -74,7 +198,7 @@ public class MathBuddy
                         switch(choice)
                         {
                             case 1: //addAdditionOp
-                                operations.add('A');
+                                operations.add('+');
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -83,8 +207,9 @@ public class MathBuddy
                                     p = 0;
                                 }
                             break;
+                            
                             case 2: //addSubtractionOp
-                                operations.add('S');
+                                operations.add('-');
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -93,8 +218,9 @@ public class MathBuddy
                                     p = 0;
                                 }
                             break;
+                            
                             case 3: //addMultiplicationOp
-                                operations.add('M');
+                                operations.add('*');
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -103,8 +229,9 @@ public class MathBuddy
                                     p = 0;
                                 }
                             break;
+                            
                             case 4: //addDivisionOp
-                                operations.add('D');
+                                operations.add('/');
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -113,8 +240,9 @@ public class MathBuddy
                                     p = 0;
                                 }
                             break;
+                            
                             case 5: //addPowerOp
-                                operations.add('E');
+                                operations.add('^');
                                 //check to end problem creation
                                 p++;
                                 if(p == problemLength)
@@ -123,33 +251,43 @@ public class MathBuddy
                                     p = 0;
                                 }
                             break;
-                            case 6: //addParentheses
-                                operations.add('P');
-                                //check to end problem creation
-//                                p++;
-//                                if(p == problemLength)
-//                                {
-//                                    choice = 0;
-//                                    p = 0;
-//                                }
+                            
+                            case 6: //addParenthesesStart
+                                operations.add('(');
+                                parenthesesStart.add(p);
+                                parenthesesCheck++;
+                                System.out.println("parcheck:" + parenthesesCheck);
+                            break;    
+
+                            case 7: //addParenthesesEnd
+                                if(parenthesesCheck < parenthesesEnds + 1)
+                                    System.out.printf("Can't, no starting parentheses%n%n");
+                                else
+                                {
+                                    operations.add(')');
+                                    parenthesesEnd.add(p);
+                                    parenthesesEnds++;
+                                }
                             break;
                         }
                     }// end of problem creation switch
                     
-                    for(i = 0; i < operations.size(); i++)
-                    {
-                        if(operations.get(i) == 'P')
-                            parenthesesCheck++;
-                    }
-                    if(parenthesesCheck % 2 != 0)
-                        operations.add('P');
+                    if(parenthesesEnds < parenthesesCheck)
+            {
+                operations.add(')');
+                parenthesesEnd.add(problemLength -1);
+            }
                     
-                    Problem tempProblem = new Problem(new Basic(), operations, problemLength + 1, digit);
+                    Problem tempProblem = new Problem(new Basic(), operations, parenthesesStart, parenthesesEnd, problemLength + 1 , digit);
                     problems.add(tempProblem);
                     operations = new ArrayList();
                     break;
                     
-                case 2: //Start session
+                case 2: //ranprob
+                    problems.add(generateRanIntProb(new Basic(),2,5));
+                    break;
+                    
+                case 3: //Start session
                     double input;
                     for(p = 0; p < problems.size(); p++)
                     {
@@ -160,6 +298,7 @@ public class MathBuddy
                         problems.get(p).displayCorrectAnswer();
                     }
                     break;
+                    
                 default: ;
             }//end of menu switch
         }
@@ -179,12 +318,13 @@ public class MathBuddy
             System.out.println("              MATHBUDDY              ");
             System.out.println("=====================================");
             System.out.println("[1] Basic");
-            System.out.println("[2] Test");
+            System.out.println("[2] GenRanProb");
+            System.out.println("[3] Test");
             System.out.println("[0] Quit");
             System.out.println("=====================================");
             System.out.printf("Select an option: ");
             option = console.nextInt();
-            if (option < 0 || option > 2)
+            if (option < 0 || option > 3)
             {
                 System.out.println("Invalid option...Try again");
                 System.out.println();
@@ -214,11 +354,12 @@ public class MathBuddy
             System.out.println("[3] Multiplication extend");
             System.out.println("[4] Division extend");
             System.out.println("[5] Power extend");
-            System.out.println("[6] Parentheses");
+            System.out.println("[6] Parentheses Start");
+            System.out.println("[7] Parentheses End");
             System.out.println("=====================================");
             System.out.printf("Select an option: ");
             option = console.nextInt();
-            if (option < 1 || option > 6)
+            if (option < 1 || option > 7)
             {
                 System.out.println("Invalid option...Try again");
                 System.out.println();
