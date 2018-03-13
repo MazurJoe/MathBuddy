@@ -3,50 +3,101 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 02-14-2018
+ * @since 03-13-2018
  * @version 0.0.1
  */
 
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Basic implements ProblemType
 {
     private Random ran = new Random(System.currentTimeMillis());
+    
+    /**
+     * ArrayList of numbers in form of object Double
+     */
     private ArrayList<Double> nums = new ArrayList();
-    private String p = "";
+    
+    /**
+     * ArrayList of Operations
+     */
     private ArrayList<Operations> operations = new ArrayList();
+    
+    /**
+     * parentheses count within problem, value is computed in readOps()
+     */
     private int parCount = 0;
+    
+    /**
+     * starting positions of parentheses in problem
+     */
     private ArrayList<Integer> parPosStart = new ArrayList();
+    
+    /**
+     * ending positions of parentheses in problem
+     */
     private ArrayList<Integer> parPosEnd = new ArrayList();
     
+    /**
+     * Object of Addition to utilize in generateCorrectAnswer() for comparison
+     */
     private Addition a = new Addition();
+    
+    /**
+     * Object of Subtraction to utilize in generateCorrectAnswer() for comparison
+     */
     private Subtraction s = new Subtraction();
+    
+    /**
+     * Object of Multiplication to utilize in generateCorrectAnswer() for comparison
+     */
     private Multiplication m = new Multiplication();
+
+    /**
+     * Object of Division to utilize in generateCorrectAnswer() for comparison
+     */
     private Division d = new Division();
+    
+    /**
+     * Object of Power to utilize in generateCorrectAnswer() for comparison
+     */
     private Power pow = new Power();
+    
     private int i;
     private int j;
     private int temp;
     
+    /**
+     * Generates string representation of problem
+     * @param ops ArrayList of operations in the form of Characters
+     * @param parStart ArrayList of parentheses starting positions
+     * @param parEnd ArrayList of parentheses ending positions
+     * @param length number of numbers within problem
+     * @param digit number of digits to be in numbers
+     * @return String of problem
+     */
     @Override
     public String generateProblem(ArrayList<Character> ops, ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit)
     {
         readOps(ops);
         parPosStart = parStart;
         parPosEnd = parEnd;
+        String p = "";
         
+//converts int digit to proper range for random number generator        
         digit = (int) (Math.pow(10, digit) + 1);
-        int i;
+        
         double tempNum;
+        
+//use Joseph's random number generator class.        
         for(i = 0; i < length; i++)
         {
             if(i < operations.size() &&  operations.get(i).getClass().isInstance(pow))
             {
                 tempNum = ran.nextInt(digit);
                 nums.add(tempNum);
-                
+    
                 tempNum = ran.nextInt(4);
                 nums.add(tempNum);
                 i++;
@@ -59,9 +110,12 @@ public class Basic implements ProblemType
         }
         System.out.println(nums.size());
         
+//int to read amount of numbers added to string        
+        j = 0;
         
-        int j = 0;
         i = 0;
+        
+//adds first number if start of problem is not '('        
         if(ops.get(0) != '(')
         {
             p += nums.get(j).intValue();
@@ -99,29 +153,24 @@ public class Basic implements ProblemType
             i++;
         }
         
+//adds last number if end of problem is not ')'        
         if(ops.get(ops.size() - 1).charValue() != ')')
         {
-//            if(ops.get(ops.size()-2).charValue() == ')')
-//            {
-//                p+= " " + ops.get(ops.size() - 1) + " ";
-//                p += nums.get(nums.size()-1).intValue();
-//                System.out.println("addLastNum");
-//            }
-//            else
-//            {
-                
                 p += nums.get(nums.size()-1).intValue();
-                System.out.println("addLastNum");
-//            }
         }
         System.out.println(p);
         return p;
     }
 
+    
+    /**
+     * Reads ArrayList of operations to convert Characters into 
+     * corresponding Operation class.
+     * @param ops an ArrayList of ops with object type Character.
+     */
     @Override
     public void readOps(ArrayList<Character> ops)
     {
-        int i;
         for(i = 0; i < ops.size(); i++)
         {
             if(ops.get(i).equals('('))
@@ -143,43 +192,34 @@ public class Basic implements ProblemType
             else if(ops.get(i).equals('+'))   
             {
                 operations.add(new Addition());
-                System.out.println("AddedOpA");
             }
             else if(ops.get(i).equals('-'))   
             {
                 operations.add(new Subtraction());
-                System.out.println("AddedOpS");
             }
         }
     }
     
-        
+    /**
+     * Utilizes ArrayList operations and ArrayList nums to compute the
+     * correct answer and converts it into a String
+     * @return string of correct answer
+     */
     @Override
     public String generateCorrectAnswer() 
     {
-        //parenthesesRecursion
+        
+//parenthesesRecursion
         if(parCount > 0)
         {
             i = parPosStart.remove(0);
-            
-            if(parPosStart.size() > 0 && parPosStart.get(0) != i)
-            {
-                temp = parPosStart.get(0);
-                parPosStart.set(0, parPosStart.get(0) - 1);
-            }
-                
-            for(j = 1; j < parPosStart.size(); j++)
-            {
-                if(parPosStart.get(j) != temp)
-                {
-                    parPosStart.set(j, parPosStart.get(j) - 1);
-                }
-            }
             parCount--;
             parenthesesOp(i);
         }
         
-        //power
+        
+        
+//power
         if(operations.size() > 0)
         {
             i = operations.size() - 1;
@@ -200,7 +240,7 @@ public class Basic implements ProblemType
                 {
                     if(operations.get(i).getClass().isInstance(pow))   
                     {
-//                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(i);
@@ -222,10 +262,12 @@ public class Basic implements ProblemType
                 System.out.println("PerformlastPow");
             }
         }
+
         
         System.out.println("Pass pow");
+
         
-        //multiplication and division
+//multiplication and division
         if(operations.size() > 0)
         {
             i = 0;
@@ -236,14 +278,16 @@ public class Basic implements ProblemType
                 {
                     if(operations.get(0).getClass().isInstance(m))   
                     {
+                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
-//                        operations.remove(0);
+                        operations.remove(0);
                         System.out.println("PerformMbreak");
                         break;
                     }
                     else if(operations.get(0).getClass().isInstance(d))   
                     {
+                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
@@ -253,6 +297,7 @@ public class Basic implements ProblemType
                 }
                 else if(operations.get(i).getClass().isInstance(m))
                 {
+                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         System.out.println("PerformM");
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
@@ -268,7 +313,8 @@ public class Basic implements ProblemType
                     operations.remove(i);
                     i = 0;
                 }
-                i++;
+                else
+                    i++;
             }
         }
         if(operations.size() == 1)
@@ -289,9 +335,11 @@ public class Basic implements ProblemType
             }
         }
         
+        
         System.out.println("Pass M and D");
         
-        //addition and subtraction
+        
+//addition and subtraction
         if(operations.size() > 0)
         {
             i = 0;
@@ -332,11 +380,10 @@ public class Basic implements ProblemType
                     i = 0;
                     System.out.println("PerformS");
                 }
-                i++;
+                else
+                    i++;
             }
         }
-        
-        
         if(operations.size() == 1)
         {
             if(operations.get(0).getClass().isInstance(a))   
@@ -357,12 +404,13 @@ public class Basic implements ProblemType
         
         System.out.println("Pass A and S");
         
-        
         return "" + nums.get(0);
     } 
     
-    
-    
+    /**
+     * Recursive method to compute operations within parentheses
+     * @param pos starting position for computation
+     */
     public void parenthesesOp(int pos)
     {
         int pEnd = parPosEnd.remove(0);

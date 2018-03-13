@@ -3,13 +3,12 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 02-08-2018
+ * @since 03-13-2018
  * @version 0.0.1
  */
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Random;
 
 public class MathBuddy 

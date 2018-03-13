@@ -1,9 +1,8 @@
-
 package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 02-14-2018
+ * @since 03-13-2018
  * @version 0.0.1
  */
 
@@ -27,14 +26,29 @@ public class Problem
     private String correctAnswer;
     
     /**
-     * Constructor for problem.
-     * @param ops
+     * constructor for problem
+     * @param p problem type
+     * @param ops ArrayList of operations
+     * @param parStart ArrayList of starting parentheses position(s)
+     * @param parEnd ArrayList of ending parentheses position(s)
+     * @param length number of numbers/variables in problem
+     * @param digit number of digits in each number
      */
     public Problem(ProblemType p, ArrayList<Character> ops, ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit)
     {
         problemType = p;
         problem = problemType.generateProblem(ops, parStart, parEnd, length, digit );
         correctAnswer = problemType.generateCorrectAnswer();
+    }
+    
+    public String getProblem()
+    {
+        return problem;
+    }
+    
+    public String getCorrectAnswer()
+    {
+        return correctAnswer;
     }
     
     /**

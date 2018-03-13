@@ -1,17 +1,13 @@
-
 package mathbuddy;
-
-import java.util.Random;
 
 /**
  * @author Paul John Nguyen
- * @since 02-14-2018
+ * @since 03-13-2018
  * @version 0.0.1
  */
 
 public class Multiplication implements Operations
-{
-    
+{    
     @Override
     public double performOperation(double in1, double in2)
     {
