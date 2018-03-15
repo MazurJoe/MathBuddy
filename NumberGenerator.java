@@ -32,6 +32,6 @@ public class NumberGenerator
      */
     public static double doubleNumGen(int numLow, int numHigh, int numOfDecimalPlaces)
     {
-        return (GENERATOR.nextInt((numHigh-numLow)*10^numOfDecimalPlaces +1)+numLow*10^numOfDecimalPlaces)/(10^numOfDecimalPlaces);
+        return (GENERATOR.nextInt((int) ((numHigh-numLow)*Math.pow(10,numOfDecimalPlaces) + Math.pow(10,numOfDecimalPlaces)))+numLow*Math.pow(10,numOfDecimalPlaces))/Math.pow(10,numOfDecimalPlaces);
     }
 }
