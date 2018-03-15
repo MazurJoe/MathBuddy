@@ -15,13 +15,9 @@ public interface ProblemType
      * length, digit, parentheses starting positions, and parentheses
      * ending positions
      * @param ops ArrayList of operations in form of Character
-     * @param parStart ArrayList of starting parentheses positions
-     * @param parEnd ArrayList of ending parentheses positions
-     * @param length number of numbers/variables to be in problem
-     * @param digit number of digits in numbers
      * @return String representation of problem
      */
-    public String generateProblem(ArrayList<Character> ops,ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit);
+    public String generateProblem(ArrayList<Character> ops, ArrayList<Double> nums);
     
     /**
      * reads ArrayList ops to convert to Operation objects

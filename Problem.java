@@ -29,15 +29,12 @@ public class Problem
      * constructor for problem
      * @param p problem type
      * @param ops ArrayList of operations
-     * @param parStart ArrayList of starting parentheses position(s)
-     * @param parEnd ArrayList of ending parentheses position(s)
-     * @param length number of numbers/variables in problem
-     * @param digit number of digits in each number
+     * @param nums
      */
-    public Problem(ProblemType p, ArrayList<Character> ops, ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit)
+    public Problem(ProblemType p, ArrayList<Character> ops, ArrayList<Double> nums)
     {
         problemType = p;
-        problem = problemType.generateProblem(ops, parStart, parEnd, length, digit );
+        problem = problemType.generateProblem(ops, nums);
         correctAnswer = problemType.generateCorrectAnswer();
     }
     

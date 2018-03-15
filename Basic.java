@@ -7,13 +7,10 @@ package mathbuddy;
  * @version 0.0.1
  */
 
-import java.util.Random;
 import java.util.ArrayList;
 
 public class Basic implements ProblemType
 {
-    private Random ran = new Random(System.currentTimeMillis());
-    
     /**
      * ArrayList of numbers in form of object Double
      */
@@ -71,45 +68,17 @@ public class Basic implements ProblemType
     /**
      * Generates string representation of problem
      * @param ops ArrayList of operations in the form of Characters
-     * @param parStart ArrayList of parentheses starting positions
-     * @param parEnd ArrayList of parentheses ending positions
-     * @param length number of numbers within problem
-     * @param digit number of digits to be in numbers
+     * 
      * @return String of problem
      */
     @Override
-    public String generateProblem(ArrayList<Character> ops, ArrayList<Integer> parStart, ArrayList<Integer> parEnd, int length, int digit)
+    public String generateProblem(ArrayList<Character> ops, ArrayList<Double> nums)
     {
         readOps(ops);
-        parPosStart = parStart;
-        parPosEnd = parEnd;
         String p = "";
-        
-//converts int digit to proper range for random number generator        
-        digit = (int) (Math.pow(10, digit) + 1);
-        
-        double tempNum;
-        
-//use Joseph's random number generator class.        
-        for(i = 0; i < length; i++)
-        {
-            if(i < operations.size() &&  operations.get(i).getClass().isInstance(pow))
-            {
-                tempNum = ran.nextInt(digit);
-                nums.add(tempNum);
-    
-                tempNum = ran.nextInt(4);
-                nums.add(tempNum);
-                i++;
-            }
-            else
-            {
-                tempNum = ran.nextInt(digit);
-                nums.add(tempNum);
-            }
-        }
-        System.out.println(nums.size());
-        
+        int length = ops.size()+1;
+        this.nums = nums;
+                
 //int to read amount of numbers added to string        
         j = 0;
         
@@ -171,31 +140,42 @@ public class Basic implements ProblemType
     @Override
     public void readOps(ArrayList<Character> ops)
     {
+        int p = 0;
         for(i = 0; i < ops.size(); i++)
         {
             if(ops.get(i).equals('('))
             {
                 parCount++;
+                parPosStart.add(p);
             }
-            if(ops.get(i).equals('^'))   
+            else if(ops.get(i).equals(')'))
+            {
+                parPosEnd.add(p-1);
+            }
+            else if(ops.get(i).equals('^'))   
             {
                 operations.add(new Power());
+                p++;
             }
             else if(ops.get(i).equals('*'))   
             {
                 operations.add(new Multiplication());
+                p++;
             }
             else if(ops.get(i).equals('/'))   
             {
                 operations.add(new Division());
+                p++;
             }
             else if(ops.get(i).equals('+'))   
             {
                 operations.add(new Addition());
+                p++;
             }
             else if(ops.get(i).equals('-'))   
             {
                 operations.add(new Subtraction());
+                p++;
             }
         }
     }
@@ -217,16 +197,18 @@ public class Basic implements ProblemType
             parenthesesOp(i);
         }
         
-        
+        System.out.println("pass Parentheses");
         
 //power
         if(operations.size() > 0)
         {
+            System.out.println("enter pow");
             i = operations.size() - 1;
             while(i > -1)
             {
                 if(operations.size() == 1)
                 {
+                    System.out.println("enter break");
                     if(operations.get(0).getClass().isInstance(pow))   
                     {
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
@@ -235,9 +217,12 @@ public class Basic implements ProblemType
                         System.out.println("PerformPowBreak");
                         break;
                     }
+                    else
+                        i--;
                 }
                 else
                 {
+                    System.out.println("enter else");
                     if(operations.get(i).getClass().isInstance(pow))   
                     {
                         System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
@@ -294,6 +279,8 @@ public class Basic implements ProblemType
                         System.out.println("PerformDbreak");
                         break;
                     }
+                    else
+                        i++;
                 }
                 else if(operations.get(i).getClass().isInstance(m))
                 {
@@ -363,6 +350,8 @@ public class Basic implements ProblemType
                         operations.remove(0);
                         break;
                     }
+                    else
+                        i++;
                 }
                 else if(operations.get(i).getClass().isInstance(a))   
                 {
