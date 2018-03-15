@@ -3,7 +3,7 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 03-13-2018
+ * @since 03-15-2018
  * @version 0.0.1
  */
 
@@ -17,7 +17,7 @@ public class Basic implements ProblemType
     private ArrayList<Double> nums = new ArrayList();
     
     /**
-     * ArrayList of Operations
+     * ArrayList of Operations, list is filled in readOps()
      */
     private ArrayList<Operations> operations = new ArrayList();
     
@@ -27,12 +27,12 @@ public class Basic implements ProblemType
     private int parCount = 0;
     
     /**
-     * starting positions of parentheses in problem
+     * starting positions of parentheses in problem, filled in readOps()
      */
     private ArrayList<Integer> parPosStart = new ArrayList();
     
     /**
-     * ending positions of parentheses in problem
+     * ending positions of parentheses in problem, filled in readOps()
      */
     private ArrayList<Integer> parPosEnd = new ArrayList();
     
@@ -68,7 +68,7 @@ public class Basic implements ProblemType
     /**
      * Generates string representation of problem
      * @param ops ArrayList of operations in the form of Characters
-     * 
+     * @param nums ArrayList of numbers in form of Double
      * @return String of problem
      */
     @Override
@@ -87,7 +87,7 @@ public class Basic implements ProblemType
 //adds first number if start of problem is not '('        
         if(ops.get(0) != '(')
         {
-            p += nums.get(j).intValue();
+            p += nums.get(j);
             j++;
         }
         
@@ -98,36 +98,40 @@ public class Basic implements ProblemType
                 p += ops.get(i);
                 if(ops.get(i +1) != '(' && ops.get(i +1) != ')')
                 {
-                    p += nums.get(j).intValue();
+                    p += nums.get(j);
                     j++;
                 }
-                System.out.println(p);
+//                System.out.println(p);
             }
             else if(ops.get(i) == ')')
             {
                 p += ops.get(i);
-                System.out.println(p);
+//                System.out.println(p);
             }
             else
             {
-                p += " " + ops.get(i) + " ";
+                if(ops.get(i) == '^')
+                    p += ops.get(i);
+                else
+                    p += " " + ops.get(i) + " ";
+                
                 if(j < length && i+1 < ops.size() && ops.get(i+1).charValue() != '(')
                 {
-                    p += nums.get(j).intValue();
+                    p += nums.get(j);
                     j++;
                 }
                 
-                System.out.println(p);
+//                System.out.println(p);
             }
             i++;
         }
         
 //adds last number if end of problem is not ')'        
-        if(ops.get(ops.size() - 1).charValue() != ')')
+        if(ops.get(ops.size() - 1) != ')')
         {
-                p += nums.get(nums.size()-1).intValue();
+                p += nums.get(nums.size()-1).doubleValue();
         }
-        System.out.println(p);
+//        System.out.println(p);
         return p;
     }
 
@@ -143,39 +147,40 @@ public class Basic implements ProblemType
         int p = 0;
         for(i = 0; i < ops.size(); i++)
         {
-            if(ops.get(i).equals('('))
+            switch (ops.get(i)) 
             {
-                parCount++;
-                parPosStart.add(p);
-            }
-            else if(ops.get(i).equals(')'))
-            {
-                parPosEnd.add(p-1);
-            }
-            else if(ops.get(i).equals('^'))   
-            {
-                operations.add(new Power());
-                p++;
-            }
-            else if(ops.get(i).equals('*'))   
-            {
-                operations.add(new Multiplication());
-                p++;
-            }
-            else if(ops.get(i).equals('/'))   
-            {
-                operations.add(new Division());
-                p++;
-            }
-            else if(ops.get(i).equals('+'))   
-            {
-                operations.add(new Addition());
-                p++;
-            }
-            else if(ops.get(i).equals('-'))   
-            {
-                operations.add(new Subtraction());
-                p++;
+                case '(':
+                    parCount++;
+                    parPosStart.add(p);
+                    break;
+                case ')':
+                    if(parPosStart.size() - 1 > parPosEnd.size())
+                        parPosEnd.add(parPosStart.get(parPosEnd.size() + 1) - 1);
+                    else
+                        parPosEnd.add(p-1);
+                    break;
+                case '^':
+                    operations.add(new Power());
+                    p++;
+                    break;
+                case '*':
+                    operations.add(new Multiplication());
+                    p++;
+                    break;
+                case '/':
+                    operations.add(new Division());
+                    p++;
+                    break;
+                case '+':
+                    operations.add(new Addition());
+                    p++;
+                    break;
+                case '-':
+                    operations.add(new Subtraction());
+                    p++;
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -188,33 +193,30 @@ public class Basic implements ProblemType
     @Override
     public String generateCorrectAnswer() 
     {
-        
-//parenthesesRecursion
-        if(parCount > 0)
+        if(parCount > 0) //parenthesesRecursionStart
         {
             i = parPosStart.remove(0);
             parCount--;
             parenthesesOp(i);
         }
         
-        System.out.println("pass Parentheses");
+//        System.out.println("pass Parentheses");
         
-//power
-        if(operations.size() > 0)
+        if(operations.size() > 0) //power
         {
-            System.out.println("enter pow");
+//            System.out.println("enter pow");
             i = operations.size() - 1;
             while(i > -1)
             {
                 if(operations.size() == 1)
                 {
-                    System.out.println("enter break");
+//                    System.out.println("enter break");
                     if(operations.get(0).getClass().isInstance(pow))   
                     {
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
-                        System.out.println("PerformPowBreak");
+//                        System.out.println("PerformPowBreak");
                         break;
                     }
                     else
@@ -222,15 +224,15 @@ public class Basic implements ProblemType
                 }
                 else
                 {
-                    System.out.println("enter else");
+//                    System.out.println("enter else");
                     if(operations.get(i).getClass().isInstance(pow))   
                     {
-                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(i);
                         i--;
-                        System.out.println("PerformPow");
+//                        System.out.println("PerformPow");
                     }
                     else
                         i--;
@@ -244,39 +246,35 @@ public class Basic implements ProblemType
                 nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                 nums.remove(1);
                 operations.remove(0);
-                System.out.println("PerformlastPow");
+//                System.out.println("PerformlastPow");
             }
         }
 
-        
-        System.out.println("Pass pow");
+//        System.out.println("Pass pow");
 
-        
-//multiplication and division
-        if(operations.size() > 0)
+        if(operations.size() > 0) //multiplication and division
         {
             i = 0;
             while(i < operations.size())
             {
-                System.out.println("loop" + i);
                 if(operations.size() == 1)
                 {
                     if(operations.get(0).getClass().isInstance(m))   
                     {
-                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
-                        System.out.println("PerformMbreak");
+//                        System.out.println("PerformMbreak");
                         break;
                     }
                     else if(operations.get(0).getClass().isInstance(d))   
                     {
-                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
-                        System.out.println("PerformDbreak");
+//                        System.out.println("PerformDbreak");
                         break;
                     }
                     else
@@ -284,8 +282,8 @@ public class Basic implements ProblemType
                 }
                 else if(operations.get(i).getClass().isInstance(m))
                 {
-                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
-                        System.out.println("PerformM");
+//                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                        System.out.println("PerformM");
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(i);
@@ -293,8 +291,8 @@ public class Basic implements ProblemType
                 }
                 else if(operations.get(i).getClass().isInstance(d))   
                 {
-                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
-                    System.out.println("PerformD");
+//                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                    System.out.println("PerformD");
                     nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                     nums.remove(i+1);
                     operations.remove(i);
@@ -311,23 +309,20 @@ public class Basic implements ProblemType
                 nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                 nums.remove(1);
                 operations.remove(0);
-                System.out.println("PerformLastM");
+//                System.out.println("PerformLastM");
             }
             else if(operations.get(0).getClass().isInstance(d))   
             {
                 nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                 nums.remove(1);
                 operations.remove(0);
-                System.out.println("PerformLastD");
+//                System.out.println("PerformLastD");
             }
         }
         
+//        System.out.println("Pass M and D");
         
-        System.out.println("Pass M and D");
-        
-        
-//addition and subtraction
-        if(operations.size() > 0)
+        if(operations.size() > 0) //addition and subtraction
         {
             i = 0;
             while(i < operations.size())
@@ -336,7 +331,7 @@ public class Basic implements ProblemType
                 {
                     if(operations.get(0).getClass().isInstance(a))   
                     {
-                        System.out.println("PerformAbreak");
+//                        System.out.println("PerformAbreak");
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
@@ -344,7 +339,7 @@ public class Basic implements ProblemType
                     }
                     else if(operations.get(i).getClass().isInstance(s))   
                     {
-                        System.out.println("PerformSbreak");
+//                        System.out.println("PerformSbreak");
                         nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
@@ -359,7 +354,7 @@ public class Basic implements ProblemType
                         nums.remove(i+1);
                         operations.remove(i);
                         i = 0;
-                        System.out.println("PerformA");
+//                        System.out.println("PerformA");
                 }
                 else if(operations.get(i).getClass().isInstance(s))   
                 {
@@ -367,7 +362,7 @@ public class Basic implements ProblemType
                     nums.remove(i+1);
                     operations.remove(i);
                     i = 0;
-                    System.out.println("PerformS");
+//                    System.out.println("PerformS");
                 }
                 else
                     i++;
@@ -380,18 +375,18 @@ public class Basic implements ProblemType
                 nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                 nums.remove(1);
                 operations.remove(0);
-                System.out.println("PerformLastA");
+//                System.out.println("PerformLastA");
             }
             else if(operations.get(0).getClass().isInstance(s))   
             {
                 nums.set(0, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                 nums.remove(1);
                 operations.remove(0);
-                System.out.println("PerformlastS");
+//                System.out.println("PerformlastS");
             }
         }
         
-        System.out.println("Pass A and S");
+//        System.out.println("Pass A and S");
         
         return "" + nums.get(0);
     } 
@@ -404,52 +399,16 @@ public class Basic implements ProblemType
     {
         int pEnd = parPosEnd.remove(0);
         
-//        if(parPosEnd.size() > 0)
-//            {
-//            if(parPosEnd.size() > 0 && parPosEnd.get(0) != pEnd)
-//            {
-//                temp = parPosEnd.get(0);
-//                parPosEnd.set(0, parPosEnd.get(0) - 1);
-//            }
-//                
-//            for(j = 1; j < parPosEnd.size(); j++)
-//            {
-//                if(parPosEnd.get(j) != 0)
-//                {
-//                    parPosEnd.set(j, parPosEnd.get(j) - 1);
-//                }
-//            }
-            
-//            }
-        
-        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
+//        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
 
-        //parenthesesRecursion
-        if(parCount > 0)
+        if(parCount > 0) //parenthesesRecursion
         {
             i = parPosStart.remove(0);
-            
-            if(parPosStart.size() > 0 && parPosStart.get(0) != i)
-            {
-                if(parPosStart.get(0) != i)
-                {
-                   temp = parPosStart.get(0);
-                   parPosStart.set(0, parPosStart.get(0) - 1);
-                }
-                for(j = 1; j < parPosStart.size(); j++)
-                {
-                  if(parPosStart.get(j) != 0)
-                  {
-                       parPosStart.set(j, parPosStart.get(j) - 1);
-                  }
-                }   
-            }
             parCount--;
             parenthesesOp(i);
         }
         
-        //power
-        if(pEnd > pos)
+        if(pEnd > pos) //power
         {
             i = pEnd;
             while( i > pos - 1)
@@ -461,9 +420,11 @@ public class Basic implements ProblemType
                         nums.set(i, operations.get(0).performOperation(nums.get(0), nums.get(1)));
                         nums.remove(1);
                         operations.remove(0);
-                        System.out.println("performPowBreak");
+//                        System.out.println("performPowBreak");
                         break;
                     }
+                    else
+                        i--;
                 }
                 else
                 {
@@ -474,16 +435,13 @@ public class Basic implements ProblemType
                         operations.remove(i);
                         pEnd--;
                         i = pEnd;
-                        System.out.println("performPow");
+//                        System.out.println("performPow");
                     }
                     else
                         i--;
                 }
             }
         }
-        
-        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
-        
         if(pos == pEnd)
         {
             if(operations.get(pos).getClass().isInstance(pow))   
@@ -491,12 +449,12 @@ public class Basic implements ProblemType
                 nums.set(pos, operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd+1)));
                 nums.remove(pEnd+1);
                 operations.remove(pos);
-                System.out.println("performlastPow");
+//                System.out.println("performlastPow");
+                pEnd--;
             }
         }
         
-        //multiplication and division
-        if(pEnd > pos)
+        if(pEnd > pos) //multiplication and division
         {
             i = pos;
             while(i <= pEnd)
@@ -508,7 +466,7 @@ public class Basic implements ProblemType
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(0);
-                        System.out.println("performMBreak");
+//                        System.out.println("performMBreak");
                         break;
                     }
                     else if(operations.get(0).getClass().isInstance(d))   
@@ -516,53 +474,58 @@ public class Basic implements ProblemType
                         nums.set(i, operations.get(0).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(0);
-                        System.out.println("performDBreak");
+//                        System.out.println("performDBreak");
                         break;
                     }
+                    else
+                        i++;
                 }
                 else if(operations.get(i).getClass().isInstance(m))  
                 {
-                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                     nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                     nums.remove(i+1);
                     operations.remove(i);
                     i = pos;
                     pEnd--;
-                    System.out.println("performM");
+//                    System.out.println("performM");
                 }
                 else if(operations.get(i).getClass().isInstance(d))   
                 {
-                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                     nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                     nums.remove(i+1);
                     operations.remove(i);
                     i = pos;
                     pEnd--;
-                    System.out.println("performD");
+//                    System.out.println("performD");
                 }
-                System.out.println("i: " + i);
+//                System.out.println("i: " + i);
                 i++;
             }
         }
         if(pos == pEnd)
         {
+            
             if(operations.get(pos).getClass().isInstance(m))   
             {
                 nums.set(pos, operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd+1)));
                 nums.remove(pEnd+1);
                 operations.remove(pos);
-                System.out.println("performLastM");
+//                System.out.println("performLastM");
+                pEnd--;
             }
             else if(operations.get(pos).getClass().isInstance(d))   
             {
                 nums.set(pos, operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd+1)));
                 nums.remove(pEnd+1);
                 operations.remove(pos);
-                System.out.println("performlastD");
+//                System.out.println("performlastD");
+                pEnd--;
             }
         }
         
-        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
+//        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
         
         if(pEnd > pos)
         {
@@ -576,7 +539,7 @@ public class Basic implements ProblemType
                         nums.set(i, operations.get(0).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(0);
-                        System.out.println("performABreak");
+//                        System.out.println("performABreak");
                         break;
                     }
                     else if(operations.get(0).getClass().isInstance(s))   
@@ -584,35 +547,37 @@ public class Basic implements ProblemType
                         nums.set(i, operations.get(0).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(0);
-                        System.out.println("performSBreak");
+//                        System.out.println("performSBreak");
                         break;
                     }
+                    else
+                        i++;
                 }
                 else if(operations.get(i).getClass().isInstance(a)) 
                 {
-                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                    System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(i);
                         i = pos;
                         pEnd--;
-System.out.println("performA");
+//System.out.println("performA");
                     }
                     else if(operations.get(i).getClass().isInstance(s))   
                     {
-                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
+//                        System.out.println("nums i: "+nums.get(i)+" nums i+1: " + nums.get(i+1) + " = " + operations.get(i).performOperation(nums.get(i), nums.get(i + 1)) + " op " + operations.get(i).getClass());
                         nums.set(i, operations.get(i).performOperation(nums.get(i), nums.get(i + 1)));
                         nums.remove(i+1);
                         operations.remove(i);
                         i = pos;
                         pEnd--;
-System.out.println("performS");
+//System.out.println("performS");
                     }
                         i++;
                 }
             }
-        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
-        System.out.println(nums.get(0)+  " , " +nums.get(1));
+//        System.out.println("pos: " + pos + "  pEnd: " +pEnd);
+//        System.out.println(nums.get(0)+  " , " +nums.get(1));
         if(pos == pEnd)
         {
             if(operations.get(pos).getClass().isInstance(a))   
@@ -620,15 +585,17 @@ System.out.println("performS");
                 nums.set(pos, operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd+1)));
                 nums.remove(pEnd+1);
                 operations.remove(pos);
-                System.out.println("performLastA");
+//                System.out.println("performLastA");
+                pEnd--;
             }
             else if(operations.get(pos).getClass().isInstance(s))   
             {
-                System.out.println("nums i: "+nums.get(pos)+" nums i+1: " + nums.get(pEnd) + " = " + operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd)) + " op " + operations.get(pos).getClass());
+//                System.out.println("nums i: "+nums.get(pos)+" nums i+1: " + nums.get(pEnd) + " = " + operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd)) + " op " + operations.get(pos).getClass());
                 nums.set(pos, operations.get(pos).performOperation(nums.get(pos), nums.get(pEnd+1)));
                 nums.remove(pEnd+1);
                 operations.remove(pos);
-                System.out.println("performlastS");
+//                System.out.println("performlastS");
+                pEnd--;
             }
         }
         

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * @author Paul John Nguyen
- * @since 03-13-2018
+ * @since 03-15-2018
  * @version 0.0.1
  */
 public interface ProblemType 
@@ -15,6 +15,7 @@ public interface ProblemType
      * length, digit, parentheses starting positions, and parentheses
      * ending positions
      * @param ops ArrayList of operations in form of Character
+     * @param nums ArrayList of numbers in form of Double
      * @return String representation of problem
      */
     public String generateProblem(ArrayList<Character> ops, ArrayList<Double> nums);

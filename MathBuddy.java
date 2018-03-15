@@ -10,129 +10,123 @@ package mathbuddy;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import static mathbuddy.NumberGenerator.doubleNumGen;
+import static mathbuddy.NumberGenerator.intNumGen;
 
 public class MathBuddy 
 {
     static Random ran = new Random(System.currentTimeMillis());
     
-    public static Problem generateRanIntProb(ProblemType probType, int dig,int l)
+    public static Problem generateRanIntProb(ProblemType probType,int l)
     {
-        int choice = -1;
         int i;
         
         int p = 0;
-        int problemLength = l;
+        int problemLength = l - 1;
         
         ArrayList<Character> operations = new ArrayList();
-        ArrayList<Integer> parenthesesStart = new ArrayList();
-        ArrayList<Integer> parenthesesEnd = new ArrayList();
         
-        int digit = dig;
         int parenthesesCheck = 0;
         int parenthesesEnds = 0;
         int temp = -1;
-        problemLength--;
         while(temp != 0)
         {
             temp = ran.nextInt(7) + 1;
-                switch(temp)
-                {
-                    case 1: //addAdditionOp
-                        operations.add('+');
-                        System.out.println("add +");
-                        //check to end problem creation
-                        p++;
-                        if(p == problemLength)
-                        {
-                            temp = 0;
-                            p = 0;
-                        }
-                        break;
-                            
-                    case 2: //addSubtractionOp
-                        operations.add('-');
-                        System.out.println("add -");
-                        //check to end problem creation
-                        p++;
-                        if(p == problemLength)
-                        {
-                            temp = 0;
-                            p = 0;
-                        }
-                        break;
-                            
-                    case 3: //addMultiplicationOp
-                        operations.add('*');
-                        System.out.println("add *");
-                        //check to end problem creation
-                        p++;
-                        if(p == problemLength)
-                        {
-                            temp = 0;
-                            p = 0;
-                        }
-                        break;
-                            
-                    case 4: //addDivisionOp
-                        operations.add('/');
-                        System.out.println("add /");
-                        //check to end problem creation
-                        p++;
-                        if(p == problemLength)
-                        {
-                            temp = 0;
-                            p = 0;
-                        }
-                    break;
-                            
-                    case 5: //addPowerOp
-                        operations.add('^');
-                        System.out.println("add ^");
-                        //check to end problem creation
-                        p++;
-                        if(p == problemLength)
-                        {
-                            temp = 0;
-                            p = 0;
-                        }
-                    break;
-                            
-                    case 6: //addParenthesesStart
-                        if(parenthesesCheck != 1 )
-                        {
-                            operations.add('(');
-                            System.out.println("add (");
-                            parenthesesStart.add(p);
-                            parenthesesCheck++;
-                        }
-                    break;    
-
-                    case 7: //addParenthesesEnd
-                        
-                        if(parenthesesEnds != 1 && operations.size() - 1 > 0 && operations.get(operations.size()-1).charValue() != '(')
-                        {
-                            if(parenthesesCheck > parenthesesEnds)
-                            {
-                            System.out.println("add )");
-                            operations.add(')');
-                            parenthesesEnd.add(p);
-                            parenthesesEnds++;
-                            }
-                        }
-                        break;
-                }
-            }// end of problem creation switch
-                    
-            if(parenthesesEnds < parenthesesCheck)
+            switch(temp)
             {
-                operations.add(')');
-                parenthesesEnd.add(problemLength -1);
+                case 1: //addAdditionOp
+                    operations.add('+');
+                    p++;
+                    if(p == problemLength) //check to end problem creation
+                    {
+                        temp = 0;
+                        p = 0;
+                    }
+                    break;
+                    
+                case 2: //addSubtractionOp
+                    operations.add('-');
+                    p++;
+                    if(p == problemLength) //check to end problem creation
+                    {
+                        temp = 0;
+                        p = 0;
+                    }
+                    break;
+                    
+                case 3: //addMultiplicationOp
+                    operations.add('*');
+                    p++;
+                    if(p == problemLength)  //check to end problem creation
+                    {
+                        temp = 0;
+                        p = 0;
+                    }
+                    break;
+                    
+                case 4: //addDivisionOp
+                    operations.add('/');
+                    p++;
+                    if(p == problemLength) //check to end problem creation
+                    {
+                        temp = 0;
+                        p = 0;
+                    }
+                    break;
+                    
+                case 5: //addPowerOp
+                    operations.add('^');
+                    p++;
+                    if(p == problemLength) //check to end problem creation
+                    {
+                        temp = 0;
+                        p = 0;
+                    }
+                    break;
+                    
+                case 6: //addParenthesesStart
+                    if(parenthesesCheck != 1 )
+                    {
+                        operations.add('(');
+                        parenthesesCheck++;
+                    }
+                    break;
+                    
+                case 7: //addParenthesesEnd
+                    if(parenthesesEnds != 1 && operations.size() - 1 > 0 && operations.get(operations.size()-1).charValue() != '(')
+                    {
+                        if(parenthesesCheck > parenthesesEnds)
+                        {
+                            operations.add(')');
+                            parenthesesEnds++;
+                        }
+                    }
+                    break;
             }
+        }// end of problem creation switch and loop
                     
-            Problem tempProblem = new Problem(new Basic(), operations, parenthesesStart, parenthesesEnd, problemLength + 1 , digit);
+        while(parenthesesEnds < parenthesesCheck)
+        {
+            operations.add(')');
+            parenthesesEnds++;
+        }
+          
+        if(operations.get(0) == '(' && operations.get(operations.size()-1) == ')')
+        {
+            operations.remove(0);
+            operations.remove(operations.size()-1);
+        }
         
-                    
-                    
+        ArrayList<Double> nums = new ArrayList();
+        Double t;
+        for(i = 0; i < l; i++)
+        {
+            t = new Double(intNumGen(1,11));
+            System.out.println("adding num: " + t.intValue());
+            nums.add(t);
+        }
+        Problem tempProblem = new Problem(new Basic(), operations, nums);
+           
         return tempProblem;
     }
         
@@ -253,7 +247,7 @@ public class MathBuddy
                             
                             case 6: //addParenthesesStart
                                 operations.add('(');
-                                parenthesesStart.add(p);
+//                                parenthesesStart.add(p);
                                 parenthesesCheck++;
                                 System.out.println("parcheck:" + parenthesesCheck);
                             break;    
@@ -264,26 +258,36 @@ public class MathBuddy
                                 else
                                 {
                                     operations.add(')');
-                                    parenthesesEnd.add(p);
+//                                    parenthesesEnd.add(p);
                                     parenthesesEnds++;
                                 }
                             break;
                         }
                     }// end of problem creation switch
                     
-                    if(parenthesesEnds < parenthesesCheck)
+                    while(parenthesesEnds < parenthesesCheck)
             {
                 operations.add(')');
-                parenthesesEnd.add(problemLength -1);
+                parenthesesEnds++;
+//                parenthesesEnd.add(problemLength -1);
             }
                     
-                    Problem tempProblem = new Problem(new Basic(), operations, parenthesesStart, parenthesesEnd, problemLength + 1 , digit);
+                    ArrayList<Double> nums = new ArrayList();
+            Double t;
+            for(i = 0; i < problemLength + 1; i++)
+            {
+                t = doubleNumGen(1,11, 3);
+                System.out.println("adding num: " + t);
+                nums.add(t);
+            }
+                    
+                    Problem tempProblem = new Problem(new Basic(), operations, nums);
                     problems.add(tempProblem);
                     operations = new ArrayList();
                     break;
                     
                 case 2: //ranprob
-                    problems.add(generateRanIntProb(new Basic(),2,5));
+                    problems.add(generateRanIntProb(new Basic(), 5));
                     break;
                     
                 case 3: //Start session

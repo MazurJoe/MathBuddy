@@ -2,7 +2,7 @@ package mathbuddy;
 
 /**
  * @author Paul John Nguyen
- * @since 03-13-2018
+ * @since 03-15-2018
  * @version 0.0.1
  */
 
@@ -28,8 +28,8 @@ public class Problem
     /**
      * constructor for problem
      * @param p problem type
-     * @param ops ArrayList of operations
-     * @param nums
+     * @param ops ArrayList of operations in form of Character
+     * @param nums ArrayList of numbers in form of Double
      */
     public Problem(ProblemType p, ArrayList<Character> ops, ArrayList<Double> nums)
     {
