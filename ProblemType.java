@@ -27,8 +27,8 @@ public interface ProblemType
     public void readOps(ArrayList<Character> ops);
     
     /**
-     * Generates a string of the correct answer to the created problem.
+     * Generates a Double of the correct answer to the created problem.
      * @return String of the correct answer
      */
-    public String generateCorrectAnswer();
+    public Double generateCorrectAnswer();
 }

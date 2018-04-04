@@ -23,7 +23,7 @@ public class Problem
     /**
      * The correct answer to the problem.
      */
-    private String correctAnswer;
+    private Double correctAnswer;
     
     /**
      * constructor for problem
@@ -43,7 +43,7 @@ public class Problem
         return problem;
     }
     
-    public String getCorrectAnswer()
+    public Double getCorrectAnswer()
     {
         return correctAnswer;
     }

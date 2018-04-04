@@ -191,7 +191,7 @@ public class Basic implements ProblemType
      * @return string of correct answer
      */
     @Override
-    public String generateCorrectAnswer() 
+    public Double generateCorrectAnswer() 
     {
         if(parCount > 0) //parenthesesRecursionStart
         {
@@ -388,7 +388,7 @@ public class Basic implements ProblemType
         
 //        System.out.println("Pass A and S");
         
-        return "" + nums.get(0);
+        return nums.get(0);
     } 
     
     /**
