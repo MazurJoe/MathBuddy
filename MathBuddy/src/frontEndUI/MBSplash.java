@@ -28,6 +28,10 @@ public class MBSplash extends javax.swing.JFrame {
         this.al = new BeginObserver(this, IDField, mb);
         this.beginButton.addActionListener(al);
     }
+    
+    public String getName(){
+        return this.IDField.getText();
+    }
 
 
     /**
@@ -46,11 +50,10 @@ public class MBSplash extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MathBuddy!");
         setName("MBSplash"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Enter ID:");
+        jLabel1.setText("Name:");
         jLabel1.setFocusable(false);
 
         beginButton.setText("Begin!");
@@ -66,7 +69,7 @@ public class MBSplash extends javax.swing.JFrame {
                 .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(beginButton)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
