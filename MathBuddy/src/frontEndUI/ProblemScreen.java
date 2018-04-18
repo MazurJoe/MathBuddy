@@ -10,12 +10,27 @@ package frontEndUI;
  * @author John Rosser
  */
 public class ProblemScreen extends javax.swing.JFrame {
+    
+    int numCorrect;
 
     /**
      * Creates new form ProblemScreen
      */
     public ProblemScreen() {
         initComponents();
+        numCorrect = 0;
+    }
+
+    public int getNumCorrect() {
+        return numCorrect;
+    }
+
+    public void setNumCorrect(int numCorrect) {
+        this.numCorrect = numCorrect;
+    }
+    
+    public double getAnswer(){
+        return Double.parseDouble(this.answer.getText());
     }
 
     /**

@@ -15,9 +15,11 @@ import mathbuddy.MathBuddy;
 public class MBReportState implements MBState{
     
     MathBuddy mb;
+    int numCorrect;
 
-    public MBReportState(MathBuddy mb) {
+    public MBReportState(MathBuddy mb, int numCorrect) {
         this.mb = mb;
+        this.numCorrect = numCorrect;
     }
     
     

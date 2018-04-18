@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import mathbuddy.MathBuddy;
-import observers.OKObserver;
+import observers.OptionsOKObserver;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     public MBOptionsMenu(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new OKObserver(this,mb);
+        this.al = new OptionsOKObserver(this,mb);
         this.Submit.addActionListener(al);
     }
     
