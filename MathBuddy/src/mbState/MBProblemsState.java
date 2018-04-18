@@ -22,7 +22,7 @@ public class MBProblemsState implements MBState{
 
     @Override
     public void update() {
-        ProblemScreen ps = new ProblemScreen();
+        ProblemScreen ps = new ProblemScreen(mb);
         ps.setVisible(true);
         
     }

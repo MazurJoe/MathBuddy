@@ -26,7 +26,7 @@ public class MBReportState implements MBState{
 
     @Override
     public void update() {
-        ReportScreen rs = new ReportScreen();
+        ReportScreen rs = new ReportScreen(numCorrect);
         rs.setVisible(true);
     }
     
