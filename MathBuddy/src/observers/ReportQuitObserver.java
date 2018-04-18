@@ -27,6 +27,7 @@ public class ReportQuitObserver implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.rs.dispose();
+        System.exit(0);
     }
     
 }
