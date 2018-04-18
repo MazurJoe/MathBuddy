@@ -28,6 +28,8 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.mb = mb;
         this.quit = new ProblemsQuitObserver(this,mb);
         this.submit = new ProblemsSubmitObserver(this,mb);
+        this.submitButton.addActionListener(submit);
+        this.quitButton.addActionListener(quit);
         numCorrect = 0;
     }
 

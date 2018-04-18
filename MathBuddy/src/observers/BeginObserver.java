@@ -37,9 +37,10 @@ public class BeginObserver implements ActionListener {
         String name = this.IDField.getText();
         int visits = 1;
         WelcomePopup wp = new WelcomePopup(menu, true, name, visits);
+        menu.dispose();
         wp.setVisible(true);
         //int visits = REESE'S METHOD
-        menu.setVisible(false);
+        
         mb.setState(new MBOptionsState(mb));
         mb.state.update();
     }

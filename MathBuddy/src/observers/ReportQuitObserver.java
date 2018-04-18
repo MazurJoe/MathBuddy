@@ -5,32 +5,28 @@
  */
 package observers;
 
-
-import frontEndUI.ProblemScreen;
+import frontEndUI.ReportScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
-import mbState.MBReportState;
 
 /**
  *
  * @author John Rosser
  */
-public class ProblemsQuitObserver implements ActionListener {
-        
-    private ProblemScreen menu;
-    private MathBuddy mb;
+public class ReportQuitObserver implements ActionListener {
     
-    public ProblemsQuitObserver(ProblemScreen menu, MathBuddy mb) {
-        this.menu = menu;
+    ReportScreen rs;
+    MathBuddy mb;
+    
+    public ReportQuitObserver(ReportScreen rs, MathBuddy mb) {
         this.mb = mb;
+        this.rs = rs;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        menu.dispose();
-        mb.setState(new MBReportState(mb, menu.getNumCorrect()));
-        mb.state.update();
+        this.rs.dispose();
     }
     
 }
