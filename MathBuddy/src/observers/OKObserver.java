@@ -6,6 +6,7 @@
 package observers;
 
 import frontEndUI.MBOptionsMenu;
+import humans.OptionsBundle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
@@ -27,7 +28,7 @@ public class OKObserver implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        menu.buildOptions();
+        OptionsBundle ob = menu.buildOptions();
         menu.setVisible(false);
         mb.setState(new MBProblemsState(mb));
         mb.state.update();

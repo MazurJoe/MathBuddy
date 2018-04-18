@@ -5,6 +5,7 @@
  */
 package observers;
 
+import frontEndUI.WelcomePopup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -33,6 +34,11 @@ public class BeginObserver implements ActionListener {
         //Find the student = IDField.getText();
         //Do stuff
         //Advance the State
+        String name = this.IDField.getText();
+        int visits = 1;
+        WelcomePopup wp = new WelcomePopup(menu, true, name, visits);
+        wp.setVisible(true);
+        //int visits = REESE'S METHOD
         menu.setVisible(false);
         mb.setState(new MBOptionsState(mb));
         mb.state.update();

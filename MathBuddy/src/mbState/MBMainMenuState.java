@@ -25,6 +25,7 @@ public class MBMainMenuState implements MBState {
     public void update() {
         MBSplash mbs = new MBSplash(mb);
         mbs.setVisible(true);
+        
         //Find the studentID of the given ID
         //getStudent(id);
         

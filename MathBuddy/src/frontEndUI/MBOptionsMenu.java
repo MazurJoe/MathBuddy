@@ -5,7 +5,10 @@
  */
 package frontEndUI;
 
+import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
 import mathbuddy.MathBuddy;
 import observers.OKObserver;
 
@@ -28,8 +31,18 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         this.Submit.addActionListener(al);
     }
     
-    public void buildOptions() {
-        //record all of the options and get ready to go.
+    public OptionsBundle buildOptions() {
+        int min = Integer.parseInt(this.LowerBound.getText());
+        int max = Integer.parseInt(this.UpperBound.getText());
+        String operation = "";
+        Enumeration<AbstractButton> buttons;
+        for(buttons = this.buttonGroup1.getElements(); buttons.hasMoreElements();){
+            AbstractButton nextButt = buttons.nextElement();
+            if(nextButt.isSelected()){
+                operation = nextButt.getText();
+            }
+        }
+        return new OptionsBundle(min,max,operation);
     }
 
     /**
@@ -41,15 +54,13 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TimerGroup = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         Submit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        Addition = new javax.swing.JCheckBox();
-        Subtraction = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        SolveX = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,16 +68,10 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         UpperBound = new javax.swing.JTextField();
         isIntegers = new javax.swing.JCheckBox();
-        jPanel3 = new javax.swing.JPanel();
-        Untimed = new javax.swing.JRadioButton();
-        CountUp = new javax.swing.JRadioButton();
-        CountDown = new javax.swing.JRadioButton();
-        TimeAlloted = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Select Options");
         setName("MBOptions"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(600, 400));
         setResizable(false);
 
         Submit.setText("OK!");
@@ -79,17 +84,22 @@ public class MBOptionsMenu extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Operations"));
 
-        Addition.setText("Addition");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Addition");
 
-        Subtraction.setText("Subtraction");
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Multiplication");
 
-        jCheckBox3.setText("Multiplication");
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Subtraction");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
-        SolveX.setText("Solve For X");
-
-        jCheckBox5.setText("jCheckBox1");
-
-        jCheckBox6.setText("jCheckBox1");
+        buttonGroup1.add(jRadioButton4);
+        jRadioButton4.setText("Division");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,29 +108,23 @@ public class MBOptionsMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Addition)
-                    .addComponent(Subtraction)
-                    .addComponent(jCheckBox3)
-                    .addComponent(SolveX)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Addition)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Subtraction)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SolveX)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox6)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,70 +193,6 @@ public class MBOptionsMenu extends javax.swing.JFrame {
                 .addGap(0, 33, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Timer"));
-
-        TimerGroup.add(Untimed);
-        Untimed.setText("Untimed");
-        Untimed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UntimedActionPerformed(evt);
-            }
-        });
-
-        TimerGroup.add(CountUp);
-        CountUp.setText("Total Time");
-        CountUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CountUpActionPerformed(evt);
-            }
-        });
-
-        TimerGroup.add(CountDown);
-        CountDown.setText("Countdown");
-        CountDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CountDownActionPerformed(evt);
-            }
-        });
-
-        TimeAlloted.setText("Time");
-        TimeAlloted.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TimeAllotedActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(TimeAlloted, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CountDown)
-                            .addComponent(CountUp)
-                            .addComponent(Untimed))))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(Untimed)
-                .addGap(18, 18, 18)
-                .addComponent(CountUp)
-                .addGap(18, 18, 18)
-                .addComponent(CountDown)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TimeAlloted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,9 +204,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -275,31 +213,14 @@ public class MBOptionsMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Submit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void UntimedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UntimedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UntimedActionPerformed
-
-    private void CountUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CountUpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CountUpActionPerformed
-
-    private void CountDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CountDownActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CountDownActionPerformed
-
-    private void TimeAllotedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeAllotedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TimeAllotedActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
         // TODO add your handling code here:
@@ -313,32 +234,29 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UpperBoundActionPerformed
 
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox Addition;
-    private javax.swing.JRadioButton CountDown;
-    private javax.swing.JRadioButton CountUp;
     private javax.swing.JTextField LowerBound;
-    private javax.swing.JCheckBox SolveX;
     private javax.swing.JButton Submit;
-    private javax.swing.JCheckBox Subtraction;
-    private javax.swing.JTextField TimeAlloted;
-    private javax.swing.ButtonGroup TimerGroup;
-    private javax.swing.JRadioButton Untimed;
     private javax.swing.JTextField UpperBound;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox isIntegers;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     // End of variables declaration//GEN-END:variables
 }
