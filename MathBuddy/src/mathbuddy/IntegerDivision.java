@@ -12,6 +12,7 @@ public class IntegerDivision
 {
     private ArrayList<Double> coeffs;
     public String[] listOfProblems = new String[10];
+    public double[] listOfAnswers = new double[10];
     public IntegerDivision(int low, int high)
     {
     Random generator = new Random(System.currentTimeMillis());
@@ -23,7 +24,7 @@ public class IntegerDivision
         int j = generator.nextInt(1)+2;
         for(int i = 0; i < j; i++)
         {
-            coeffs.add(1.0*NumberGenerator.intNumGen(low,high));
+            coeffs.add(NumberGenerator.intNumGen(low,high));
             
         }
         ArrayList<Character> ops = new ArrayList();
@@ -33,7 +34,7 @@ public class IntegerDivision
         }    
         Problem p = new Problem(new Basic(), ops, coeffs);
         listOfProblems[k] = p.getProblem();  
-        
+        listOfAnswers[k] = p.getCorrectAnswer();
     }
     }
 

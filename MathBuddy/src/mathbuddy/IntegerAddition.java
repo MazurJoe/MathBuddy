@@ -24,7 +24,7 @@ public class IntegerAddition
             int j = generator.nextInt(1)+2;
             for(int i = 0; i < j; i++)
             {
-                coeffs.add(1.0*NumberGenerator.intNumGen(low,high));    
+                coeffs.add(NumberGenerator.intNumGen(low,high));    
             }
             ArrayList<Character> ops = new ArrayList();
             for(int i= 0; i < coeffs.size() -1; i++)

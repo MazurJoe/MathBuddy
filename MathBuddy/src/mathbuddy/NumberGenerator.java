@@ -1,3 +1,4 @@
+
 /**
  * @author Joseph Mazur
  * @author Paul John Nguyen
@@ -18,9 +19,9 @@ public class NumberGenerator
      * @param numHigh highest number of range
      * @return integer within range
      */
-    public static int intNumGen(int numLow, int numHigh)
+    public static double intNumGen(int numLow, int numHigh)
     {
-        return GENERATOR.nextInt(numHigh-numLow+1)+numLow;
+        return 1.0*GENERATOR.nextInt(numHigh-numLow+1)+numLow;
     }
     
     /**
