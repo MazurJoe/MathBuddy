@@ -12,6 +12,7 @@ public class DoubleMultiplication
 {
     private ArrayList<Double> coeffs;
     public String[] listOfProblems = new String[10];
+    public double[] listOfAnswers = new double[10];
     public DoubleMultiplication(int low, int high, int numOfDecimals)
     {
         Random generator = new Random(System.currentTimeMillis()); 
@@ -19,7 +20,7 @@ public class DoubleMultiplication
         {
             ArrayList<Double> temp = new ArrayList<>();
             this.coeffs = temp;
-            int j = generator.nextInt(1)+2;
+            int j = 2;
             for(int i = 0; i < j; i++)
             {
                 coeffs.add(NumberGenerator.doubleNumGen(low,high,numOfDecimals));
@@ -30,6 +31,7 @@ public class DoubleMultiplication
             //make coeffs the last parameter of the object p
             Problem p = new Problem(new Basic(), ops, coeffs);
             listOfProblems[k] = p.getProblem();
+            listOfAnswers[k] = p.getCorrectAnswer();
         }
     }      
 }

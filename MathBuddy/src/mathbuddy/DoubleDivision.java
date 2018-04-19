@@ -13,7 +13,7 @@ public class DoubleDivision
     private ArrayList<Double> coeffs;
     private int x,y,z;
     public String[] listOfProblems = new String[10];
-    
+    public double[] listOfAnswers = new double[10];
     public DoubleDivision(int low, int high, int numOfDecimals)
     {
         Random generator = new Random(System.currentTimeMillis());
@@ -21,7 +21,7 @@ public class DoubleDivision
         {    
             ArrayList<Double> temp = new ArrayList<>();
             this.coeffs = temp;
-            int j = generator.nextInt(1)+2;
+            int j = 2;
             for(int i = 0; i < j; i++)
             {
                 coeffs.add(NumberGenerator.doubleNumGen(low,high,numOfDecimals));  
@@ -33,6 +33,7 @@ public class DoubleDivision
             }
             Problem p = new Problem(new Basic(), ops, coeffs);
             listOfProblems[k] = p.getProblem();
+            listOfAnswers[k] = p.getCorrectAnswer();
         }    
     }        
 }

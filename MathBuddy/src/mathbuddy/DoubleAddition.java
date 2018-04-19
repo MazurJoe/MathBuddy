@@ -9,7 +9,7 @@ public class DoubleAddition
     private ArrayList<Double> coeffs;
     private int x,y,z;
     public String[] listOfProblems = new String[10];
-    
+    public double[] listOfAnswers = new double[10];
     public DoubleAddition(int low, int high, int numOfDecimals)
     {
         Random generator = new Random(System.currentTimeMillis());
@@ -17,7 +17,7 @@ public class DoubleAddition
         {    
             ArrayList<Double> temp = new ArrayList<>();
             this.coeffs = temp;
-            int j = generator.nextInt(1)+2;
+            int j = 2;
             for(int i = 0; i < j; i++)
             {
                 coeffs.add(NumberGenerator.doubleNumGen(low,high,numOfDecimals));   
@@ -29,6 +29,7 @@ public class DoubleAddition
             }
             Problem p = new Problem(new Basic(), ops, coeffs);
             listOfProblems[k] = p.getProblem();
+            listOfAnswers[k] = p.getCorrectAnswer();
         }
     }
 }
