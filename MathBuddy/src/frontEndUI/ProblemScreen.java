@@ -7,7 +7,14 @@ package frontEndUI;
 
 import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import mathbuddy.DoubleAddition;
+import mathbuddy.DoubleDivision;
+import mathbuddy.DoubleMultiplication;
+import mathbuddy.DoubleSubtraction;
 import mathbuddy.IntegerAddition;
+import mathbuddy.IntegerDivision;
+import mathbuddy.IntegerMultiplication;
+import mathbuddy.IntegerSubtraction;
 import mathbuddy.MathBuddy;
 import mbtimer.MBStopWatch;
 import observers.ProblemsQuitObserver;
@@ -36,8 +43,6 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.submit = new ProblemsSubmitObserver(this,mb);
         this.submitButton.addActionListener(submit);
         this.quitButton.addActionListener(quit);
-                     
-        
         numCorrect = 0;
     }
 
@@ -50,6 +55,50 @@ public class ProblemScreen extends javax.swing.JFrame {
                 this.jTextField2.setText(problems[0]);
                 return;
             }
+            if(ob.getOperation().equals("Subtraction")){
+                IntegerSubtraction obj = new IntegerSubtraction(ob.getMin(), ob.getMax());
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+            if(ob.getOperation().equals("Multiplication")){
+                IntegerMultiplication obj = new IntegerMultiplication(ob.getMin(), ob.getMax());
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+            if(ob.getOperation().equals("Division")){
+                IntegerDivision obj = new IntegerDivision(ob.getMin(), ob.getMax());
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }                        
+        }
+        else {
+            if(ob.getOperation().equals("Addition")){                
+                DoubleAddition obj = new DoubleAddition(ob.getMin(), ob.getMax(),2);
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+            if(ob.getOperation().equals("Subtraction")){
+                DoubleSubtraction obj = new DoubleSubtraction(ob.getMin(), ob.getMax(),2);
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+            if(ob.getOperation().equals("Multiplication")){
+                DoubleMultiplication obj = new DoubleMultiplication(ob.getMin(), ob.getMax(), 2);
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+            if(ob.getOperation().equals("Division")){
+                DoubleDivision obj = new DoubleDivision(ob.getMin(), ob.getMax(), 2);
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }  
         }
     }
     
