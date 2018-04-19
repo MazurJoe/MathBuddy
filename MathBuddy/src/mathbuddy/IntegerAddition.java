@@ -13,6 +13,7 @@ public class IntegerAddition
     private ArrayList<Double> coeffs;
     private int y,z;
     public String[] listOfProblems = new String[10];
+    public double[] listOfAnswers = new double[10];
     public IntegerAddition(int low, int high)
     {
         Random generator = new Random(System.currentTimeMillis());
@@ -32,6 +33,7 @@ public class IntegerAddition
             }
             Problem p = new Problem(new Basic(), ops, coeffs);
             listOfProblems[k] = p.getProblem();
+            listOfAnswers[k] = p.getCorrectAnswer(); 
         }  
     }    
 }
