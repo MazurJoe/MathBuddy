@@ -5,7 +5,9 @@
  */
 package frontEndUI;
 
+import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import mathbuddy.IntegerAddition;
 import mathbuddy.MathBuddy;
 import mbtimer.MBStopWatch;
 import observers.ProblemsQuitObserver;
@@ -21,6 +23,8 @@ public class ProblemScreen extends javax.swing.JFrame {
     ActionListener quit,submit;
     MathBuddy mb;
     MBStopWatch sw;
+    OptionsBundle ob;
+    String[] problems;
 
     /**
      * Creates new form ProblemScreen
@@ -32,16 +36,43 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.submit = new ProblemsSubmitObserver(this,mb);
         this.submitButton.addActionListener(submit);
         this.quitButton.addActionListener(quit);
+                     
         
         numCorrect = 0;
     }
+
+    public void setObAndMakeProblems(OptionsBundle ob) {
+        this.ob = ob;
+        if(ob.isIntegersOnly()) {
+            if(ob.getOperation().equals("Addition")){
+                IntegerAddition obj = new IntegerAddition(ob.getMin(), ob.getMax());
+                problems = obj.listOfProblems;
+                this.jTextField2.setText(problems[0]);
+                return;
+            }
+        }
+    }
+    
+    public void updateProblem(int k){
+        this.jTextField2.setText(problems[k]);
+    }
+    
+    public void noMoreProblems(){
+        this.jTextField2.setText("All done");
+    }
+
+    public String[] getProblems() {
+        return problems;
+    }
+    
+    
 
     public int getNumCorrect() {
         return numCorrect;
     }
 
-    public void setNumCorrect(int numCorrect) {
-        this.numCorrect = numCorrect;
+    public void setNumCorrect() {
+        this.numCorrect++;
     }
     
     public double getAnswer(){
@@ -58,6 +89,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         displayArea = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
         answer = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
@@ -75,11 +107,17 @@ public class ProblemScreen extends javax.swing.JFrame {
         displayArea.setLayout(displayAreaLayout);
         displayAreaLayout.setHorizontalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(displayAreaLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 123, Short.MAX_VALUE)
+            .addGroup(displayAreaLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         submitButton.setText("Submit");
@@ -143,6 +181,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     private javax.swing.JPanel displayArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables

@@ -30,7 +30,7 @@ public class OptionsOKObserver implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         OptionsBundle ob = menu.buildOptions();
         menu.dispose();
-        mb.setState(new MBProblemsState(mb));
+        mb.setState(new MBProblemsState(mb,ob));
         mb.state.update();
     }
     

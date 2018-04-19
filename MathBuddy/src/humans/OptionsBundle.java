@@ -12,11 +12,13 @@ package humans;
 public class OptionsBundle {
     private int min,max;
     private String operation;
+    private boolean integersOnly;
 
-    public OptionsBundle(int min, int max, String operation) {
+    public OptionsBundle(int min, int max, String operation, boolean integersOnly) {
         this.min = min;
         this.max = max;
         this.operation = operation;
+        this.integersOnly = integersOnly;
     }
     
 
@@ -30,6 +32,10 @@ public class OptionsBundle {
 
     public String getOperation() {
         return operation;
+    }
+
+    public boolean isIntegersOnly() {
+        return integersOnly;
     }
     
 }

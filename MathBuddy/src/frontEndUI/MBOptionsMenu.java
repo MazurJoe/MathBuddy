@@ -34,6 +34,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     public OptionsBundle buildOptions() {
         int min = Integer.parseInt(this.LowerBound.getText());
         int max = Integer.parseInt(this.UpperBound.getText());
+        boolean intDec = this.isIntegers.isSelected();
         String operation = "";
         Enumeration<AbstractButton> buttons;
         for(buttons = this.buttonGroup1.getElements(); buttons.hasMoreElements();){
@@ -42,7 +43,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
                 operation = nextButt.getText();
             }
         }
-        return new OptionsBundle(min,max,operation);
+        return new OptionsBundle(min,max,operation,intDec);
     }
 
     /**

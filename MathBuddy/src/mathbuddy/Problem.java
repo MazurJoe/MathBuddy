@@ -23,7 +23,7 @@ public class Problem
     /**
      * The correct answer to the problem.
      */
-    private Double correctAnswer;
+    public Double correctAnswer;
     
     /**
      * constructor for problem

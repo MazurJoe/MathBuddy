@@ -8,6 +8,7 @@ package observers;
 import frontEndUI.ProblemScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import mathbuddy.Comparator;
 import mathbuddy.MathBuddy;
 
 /**
@@ -18,15 +19,37 @@ public class ProblemsSubmitObserver implements ActionListener {
     
     private ProblemScreen menu;
     private MathBuddy mb;
+    private Comparator comp;
+    private String[] problems;
+    private int positionCounter;
     
     public ProblemsSubmitObserver(ProblemScreen menu, MathBuddy mb) {
         this.menu = menu;
         this.mb = mb;
+        this.comp = new Comparator();
+        this.problems = this.menu.getProblems();
+        this.positionCounter = 0;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        double answer = menu.getAnswer();
+        if(positionCounter<9){
+            double answer = menu.getAnswer();
+            if(comp.numComparator(answer, 3)){
+              menu.setNumCorrect();
+            }
+            positionCounter++;
+            menu.updateProblem(positionCounter);
+        }
+        else if(positionCounter==9){
+            double answer = menu.getAnswer();
+            if(comp.numComparator(answer, 3)){
+                menu.setNumCorrect();
+            }
+            positionCounter++;
+            menu.noMoreProblems();
+        }
+        else{}
         //CHECK ANSWER
     }
     

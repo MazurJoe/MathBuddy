@@ -6,6 +6,7 @@
 package mbState;
 
 import frontEndUI.ProblemScreen;
+import humans.OptionsBundle;
 import mathbuddy.MathBuddy;
 
 
@@ -16,14 +17,17 @@ import mathbuddy.MathBuddy;
 public class MBProblemsState implements MBState{
     
     MathBuddy mb;
+    OptionsBundle ob;
     
-    public MBProblemsState(MathBuddy mb){
+    public MBProblemsState(MathBuddy mb, OptionsBundle ob){
         this.mb = mb;
+        this.ob = ob;
     }
 
     @Override
     public void update() {
         ProblemScreen ps = new ProblemScreen(mb);
+        ps.setObAndMakeProblems(ob);
         ps.setVisible(true);
         
     }
