@@ -1,0 +1,17 @@
+Doc #1: a list of userNames userType\userNames.txt
+userName1 userName2 ...
+
+Doc#2: User Class List with header userType\userName\userName.txt
+className1 teacherName1 subjectName1 ...
+
+Doc#3: user Class data with header userType\userName\className\className.txt
+userName UserType ClassName TeacherName SubjectName
+*either lines of data or references to other text files containting data
+
+doc#4 Teacher class data \userType\UserName\ClassName\className.txt
+usernName(teacher) UserType ClassName subjectName 
+studentName1 studentName2...
+**can use pointer above to find data. also can have basic meta data below
+
+Doc#5: Class Roster a list of classes that students can join misc\classes.txt
+classname1 subject1 teacher1...
