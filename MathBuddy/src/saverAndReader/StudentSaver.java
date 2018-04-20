@@ -111,6 +111,18 @@ the following are actions that can be performed when user has selected a class
         return out;
     }
     
+    public ArrayList<String> getSavedProblems() throws FileNotFoundException {
+        File file = new File(dir + "\\student\\" + studentUserName + "\\" + className + "\\" + "savedProbs.txt");
+        Scanner read = new Scanner(file);
+        ArrayList<String> out = new ArrayList();
+        int numOfProblems = read.nextInt();
+        for(int i = 0; i < numOfProblems; i++) {
+            out.add(read.next());
+        }
+        read.close();
+        return out;
+    }
+    
     
     //----------------------------------------
 
