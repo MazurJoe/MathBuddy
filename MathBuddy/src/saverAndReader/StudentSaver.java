@@ -81,6 +81,7 @@ the following are actions that can be performed when user has selected a class
      * @param problemType this is the type of problem like solve for x, addition, ect. 
      * @param nums The important numbers that are needed to created that type of problem
      */
+    /*
     public void saveProblem(String problemType, ArrayList<G> nums, String typeOfArray) throws FileNotFoundException
     {
         File file = new File(dir + "\\student\\" + studentUserName + "\\" + className + "\\" + "savedProbs.txt");
@@ -104,7 +105,7 @@ the following are actions that can be performed when user has selected a class
         userFile.close();
     }
     
-    
+    */
     //----------------------------------------
 
    
