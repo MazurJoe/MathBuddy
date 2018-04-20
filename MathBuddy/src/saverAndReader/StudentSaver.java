@@ -90,18 +90,13 @@ the following are actions that can be performed when user has selected a class
         int problemsInFile = read.nextInt();
         for(int i = 0; i < problemsInFile; i++)
         {
-            holder += read.next() + read.next();
+            holder += read.next() + " ";
         }
         read.close();
         holder = (problemsInFile+1) + " " + holder;
-        File userData = new File(dir + "\\student\\" + studentUserName + "\\" +className + "\\savedProbs.txt");//throw exception
+         File userData = new File(dir + "\\student\\" + studentUserName + "\\" +className + "\\savedProbs.txt");
         PrintWriter userFile = new PrintWriter(userData);
-        userFile.print(holder);
-        userFile.print(" " + problemType + " " +  typeOfArray + " "+ nums.size() + " ");
-        for (int i = 0; i < nums.size(); i++)
-        {
-            userFile.print(nums.get(i) + " ");
-        }
+        userFile.print(holder + " " + problem);
         userFile.close();
     }
     
