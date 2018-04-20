@@ -32,6 +32,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     MBStopWatch sw;
     OptionsBundle ob;
     String[] problems;
+    double[] answers;
 
     /**
      * Creates new form ProblemScreen
@@ -43,6 +44,8 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.submit = new ProblemsSubmitObserver(this,mb);
         this.submitButton.addActionListener(submit);
         this.quitButton.addActionListener(quit);
+        this.problems = new String[10];
+        this.answers = new double[10];
         numCorrect = 0;
     }
 
@@ -52,24 +55,37 @@ public class ProblemScreen extends javax.swing.JFrame {
             if(ob.getOperation().equals("Addition")){
                 IntegerAddition obj = new IntegerAddition(ob.getMin(), ob.getMax());
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
+                //answers = obj.listOfAnswers;
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Subtraction")){
                 IntegerSubtraction obj = new IntegerSubtraction(ob.getMin(), ob.getMax());
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Multiplication")){
                 IntegerMultiplication obj = new IntegerMultiplication(ob.getMin(), ob.getMax());
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Division")){
                 IntegerDivision obj = new IntegerDivision(ob.getMin(), ob.getMax());
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }                        
@@ -78,24 +94,36 @@ public class ProblemScreen extends javax.swing.JFrame {
             if(ob.getOperation().equals("Addition")){                
                 DoubleAddition obj = new DoubleAddition(ob.getMin(), ob.getMax(),2);
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Subtraction")){
                 DoubleSubtraction obj = new DoubleSubtraction(ob.getMin(), ob.getMax(),2);
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Multiplication")){
                 DoubleMultiplication obj = new DoubleMultiplication(ob.getMin(), ob.getMax(), 2);
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Division")){
                 DoubleDivision obj = new DoubleDivision(ob.getMin(), ob.getMax(), 2);
                 problems = obj.listOfProblems;
+                for(int i = 0; i < obj.listOfAnswers.length; i++){
+                    answers[i] = obj.listOfAnswers[i];
+                }
                 this.jTextField2.setText(problems[0]);
                 return;
             }  
@@ -113,6 +141,12 @@ public class ProblemScreen extends javax.swing.JFrame {
     public String[] getProblems() {
         return problems;
     }
+
+    public double getCurrAnswers(int counter) {
+        return answers[counter];
+    }
+    
+    
     
     
 
@@ -126,6 +160,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     
     public double getAnswer(){
         return Double.parseDouble(this.answer.getText());
+        
     }
 
     /**

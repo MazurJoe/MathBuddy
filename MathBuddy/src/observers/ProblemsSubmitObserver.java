@@ -20,14 +20,12 @@ public class ProblemsSubmitObserver implements ActionListener {
     private ProblemScreen menu;
     private MathBuddy mb;
     private Comparator comp;
-    private String[] problems;
     private int positionCounter;
     
     public ProblemsSubmitObserver(ProblemScreen menu, MathBuddy mb) {
         this.menu = menu;
         this.mb = mb;
         this.comp = new Comparator();
-        this.problems = this.menu.getProblems();
         this.positionCounter = 0;
     }
 
@@ -35,15 +33,15 @@ public class ProblemsSubmitObserver implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(positionCounter<9){
             double answer = menu.getAnswer();
-            if(comp.numComparator(answer, 3)){
+            if(comp.numComparator(answer, menu.getCurrAnswers(positionCounter))){
               menu.setNumCorrect();
             }
             positionCounter++;
-            menu.updateProblem(positionCounter);
+            menu.updateProblem(positionCounter);            
         }
         else if(positionCounter==9){
             double answer = menu.getAnswer();
-            if(comp.numComparator(answer, 3)){
+            if(comp.numComparator(answer, menu.getCurrAnswers(positionCounter))){
                 menu.setNumCorrect();
             }
             positionCounter++;
