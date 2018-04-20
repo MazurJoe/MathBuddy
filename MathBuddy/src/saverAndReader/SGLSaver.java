@@ -43,6 +43,10 @@ public class SGLSaver {
                     loginCount.print(login);
                     loginCount.close();
     }
+
+    public String getStudentUserName() {
+        return studentUserName;
+    }
     
     public int getLoginCount() throws FileNotFoundException{
         File file = new File(dir + "\\SGL\\" + studentUserName + "\\loginCount.txt");
