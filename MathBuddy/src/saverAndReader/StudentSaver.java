@@ -111,6 +111,7 @@ the following are actions that can be performed when user has selected a class
         return out;
     }
     
+    /*
     public ArrayList<String> getSavedProblems() throws FileNotFoundException {
         File file = new File(dir + "\\student\\" + studentUserName + "\\" + className + "\\" + "savedProbs.txt");
         Scanner read = new Scanner(file);
@@ -122,7 +123,7 @@ the following are actions that can be performed when user has selected a class
         read.close();
         return out;
     }
-    
+    */
     
     //----------------------------------------
 
