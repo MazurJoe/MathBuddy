@@ -8,6 +8,7 @@ package frontEndUI;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
 import observers.ReportQuitObserver;
+import observers.ResetObserver;
 
 /**
  *
@@ -19,22 +20,22 @@ public class ReportScreen extends javax.swing.JFrame {
      * Creates new form ProblemScreen
      */
     ActionListener al;
+    ActionListener newSetAL;
     MathBuddy mb;
     
     
     
-    public ReportScreen(MathBuddy mb) {
+    public ReportScreen(MathBuddy mb, int numCorrect) {
         initComponents();
         this.mb = mb;
         this.al = new ReportQuitObserver(this,mb);
         this.quitButton.addActionListener(al);
+        this.newSetAL = new ResetObserver(this, mb);
+        this.newSetButton.addActionListener(this.newSetAL);
+        this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
         
     }
 
-    public ReportScreen(int numCorrect) {
-        initComponents();
-        this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +49,7 @@ public class ReportScreen extends javax.swing.JFrame {
         displayArea = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         quitButton = new javax.swing.JButton();
+        newSetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Math Buddy!");
@@ -65,7 +67,7 @@ public class ReportScreen extends javax.swing.JFrame {
             .addGroup(displayAreaLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,12 +84,16 @@ public class ReportScreen extends javax.swing.JFrame {
             }
         });
 
+        newSetButton.setText("New set");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(410, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newSetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(displayArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -98,7 +104,9 @@ public class ReportScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(displayArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(quitButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quitButton)
+                    .addComponent(newSetButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -106,7 +114,7 @@ public class ReportScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        System.exit(0);
+        //System.exit(0);
     }//GEN-LAST:event_quitButtonActionPerformed
 
     /**
@@ -117,6 +125,7 @@ public class ReportScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel displayArea;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton newSetButton;
     private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables
 }
