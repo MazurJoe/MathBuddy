@@ -10,6 +10,7 @@ import humans.OptionsBundle;
 import mathbuddy.MathBuddy;
 
 
+
 /**
  *
  * @author John Rosser
@@ -29,7 +30,6 @@ public class MBProblemsState implements MBState{
         ProblemScreen ps = new ProblemScreen(mb);
         ps.setObAndMakeProblems(ob);
         ps.setVisible(true);
-        
     }
     
 }
