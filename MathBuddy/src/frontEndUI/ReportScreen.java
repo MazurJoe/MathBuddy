@@ -8,7 +8,7 @@ package frontEndUI;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
 import observers.ReportQuitObserver;
-import observers.ResetObserver;
+import observers.ReportResetObserver;
 
 /**
  *
@@ -30,7 +30,7 @@ public class ReportScreen extends javax.swing.JFrame {
         this.mb = mb;
         this.al = new ReportQuitObserver(this,mb);
         this.quitButton.addActionListener(al);
-        this.newSetAL = new ResetObserver(this, mb);
+        this.newSetAL = new ReportResetObserver(mb, this);
         this.newSetButton.addActionListener(this.newSetAL);
         this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
         
