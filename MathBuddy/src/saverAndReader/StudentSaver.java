@@ -81,7 +81,7 @@ the following are actions that can be performed when user has selected a class
      * @param problemType this is the type of problem like solve for x, addition, ect. 
      * @param nums The important numbers that are needed to created that type of problem
      */
-    public void saveProblem(String problemType, ArrayList<G> nums, String typeOfArray) throws FileNotFoundException
+    public void saveProblem(String problem) throws FileNotFoundException
     {
         File file = new File(dir + "\\student\\" + studentUserName + "\\" + className + "\\" + "savedProbs.txt");
         Scanner read = new Scanner(file);
@@ -89,19 +89,26 @@ the following are actions that can be performed when user has selected a class
         int problemsInFile = read.nextInt();
         for(int i = 0; i < problemsInFile; i++)
         {
-            holder += read.next() + read.next();
+            holder += read.next() + " ";
         }
         read.close();
         holder = (problemsInFile+1) + " " + holder;
-        File userData = new File(dir + "\\student\\" + studentUserName + "\\" +className + "\\savedProbs.txt");//throw exception
+         File userData = new File(dir + "\\student\\" + studentUserName + "\\" +className + "\\savedProbs.txt");
         PrintWriter userFile = new PrintWriter(userData);
-        userFile.print(holder);
-        userFile.print(" " + problemType + " " +  typeOfArray + " "+ nums.size() + " ");
-        for (int i = 0; i < nums.size(); i++)
-        {
-            userFile.print(nums.get(i) + " ");
-        }
+        userFile.print(holder + " " + problem);
         userFile.close();
+    }
+    
+    public ArrayList<String> getSavedProblems() throws FileNotFoundException {
+        File file = new File(dir + "\\student\\" + studentUserName + "\\" + className + "\\" + "savedProbs.txt");
+        Scanner read = new Scanner(file);
+        ArrayList<String> out = new ArrayList();
+        int numOfProblems = read.nextInt();
+        for(int i = 0; i < numOfProblems; i++) {
+            out.add(read.next());
+        }
+        read.close();
+        return out;
     }
     
     
