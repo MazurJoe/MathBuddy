@@ -49,6 +49,7 @@ public class ProblemsSubmitObserver implements ActionListener {
             positionCounter++;
             menu.clearAnswer();
             menu.noMoreProblems();
+            menu.getQuitButton().requestFocus();
         }
         else{}
         //CHECK ANSWER

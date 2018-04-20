@@ -16,12 +16,12 @@ import mbState.MBProblemsState;
  *
  * @author John Rosser
  */
-public class OptionsOKObserver implements ActionListener {
+public class OKObserver implements ActionListener {
     
     private MBOptionsMenu menu;
     private MathBuddy mb;
     
-    public OptionsOKObserver(MBOptionsMenu menu, MathBuddy mb) {
+    public OKObserver(MBOptionsMenu menu, MathBuddy mb) {
         this.menu = menu;
         this.mb = mb;
     }
