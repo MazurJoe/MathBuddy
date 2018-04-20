@@ -7,10 +7,12 @@ package frontEndUI;
 
 import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import mathbuddy.MathBuddy;
-import observers.OptionsOKObserver;
+import observers.EnterObserver;
+import observers.OKObserver;
 
 /**
  *
@@ -20,6 +22,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
 
     
     ActionListener al;
+
     MathBuddy mb;
     /**
      * Creates new form MBOptionsMenu
@@ -27,7 +30,9 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     public MBOptionsMenu(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new OptionsOKObserver(this,mb);
+        this.al = new OKObserver(this,mb);
+        this.LowerBound.addKeyListener(new EnterObserver(Submit));
+        this.UpperBound.addKeyListener(new EnterObserver(Submit));
         this.Submit.addActionListener(al);
     }
     

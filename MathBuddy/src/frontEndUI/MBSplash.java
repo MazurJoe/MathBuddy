@@ -6,8 +6,10 @@
 package frontEndUI;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import mathbuddy.MathBuddy;
 import observers.BeginObserver;
+import observers.EnterObserver;
 
 /**
  *
@@ -16,6 +18,7 @@ import observers.BeginObserver;
 public class MBSplash extends javax.swing.JFrame {
 
     ActionListener al;
+    KeyListener kl;
     MathBuddy mb;
     
     
@@ -26,7 +29,9 @@ public class MBSplash extends javax.swing.JFrame {
         initComponents();
         this.mb = mb;
         this.al = new BeginObserver(this, IDField, mb);
+        this.kl = new EnterObserver(beginButton);
         this.beginButton.addActionListener(al);
+        this.IDField.addKeyListener(kl);
     }
     
     public String getName(){

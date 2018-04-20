@@ -7,6 +7,7 @@ package frontEndUI;
 
 import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import mathbuddy.DoubleAddition;
 import mathbuddy.DoubleDivision;
 import mathbuddy.DoubleMultiplication;
@@ -16,7 +17,7 @@ import mathbuddy.IntegerDivision;
 import mathbuddy.IntegerMultiplication;
 import mathbuddy.IntegerSubtraction;
 import mathbuddy.MathBuddy;
-import mbtimer.MBStopWatch;
+import observers.EnterObserver;
 import observers.ProblemsQuitObserver;
 import observers.ProblemsSubmitObserver;
 
@@ -29,7 +30,6 @@ public class ProblemScreen extends javax.swing.JFrame {
     int numCorrect;
     ActionListener quit,submit;
     MathBuddy mb;
-    MBStopWatch sw;
     OptionsBundle ob;
     String[] problems;
     double[] answers;
@@ -44,10 +44,13 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.submit = new ProblemsSubmitObserver(this,mb);
         this.submitButton.addActionListener(submit);
         this.quitButton.addActionListener(quit);
+        this.quitButton.addKeyListener(new EnterObserver(quitButton));
+        this.answer.addKeyListener(new EnterObserver(submitButton));
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
     }
+    
 
     public void setObAndMakeProblems(OptionsBundle ob) {
         this.ob = ob;
@@ -140,6 +143,10 @@ public class ProblemScreen extends javax.swing.JFrame {
 
     public String[] getProblems() {
         return problems;
+    }
+    
+    public JButton getQuitButton() {
+        return  this.quitButton;
     }
 
     public double getCurrAnswers(int counter) {
