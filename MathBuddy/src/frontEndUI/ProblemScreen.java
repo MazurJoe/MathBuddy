@@ -146,9 +146,13 @@ public class ProblemScreen extends javax.swing.JFrame {
         return answers[counter];
     }
     
+    public void clearAnswer(){
+        this.answer.setText("");
+    }
     
-    
-    
+    public void resetFocus(){
+        this.answer.requestFocus();
+    }
 
     public int getNumCorrect() {
         return numCorrect;

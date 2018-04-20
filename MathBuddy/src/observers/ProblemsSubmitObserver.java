@@ -37,7 +37,9 @@ public class ProblemsSubmitObserver implements ActionListener {
               menu.setNumCorrect();
             }
             positionCounter++;
-            menu.updateProblem(positionCounter);            
+            menu.updateProblem(positionCounter);
+            menu.clearAnswer();
+            menu.resetFocus();
         }
         else if(positionCounter==9){
             double answer = menu.getAnswer();
@@ -45,6 +47,7 @@ public class ProblemsSubmitObserver implements ActionListener {
                 menu.setNumCorrect();
             }
             positionCounter++;
+            menu.clearAnswer();
             menu.noMoreProblems();
         }
         else{}
