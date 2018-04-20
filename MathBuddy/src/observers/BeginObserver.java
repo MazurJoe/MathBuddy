@@ -8,10 +8,14 @@ package observers;
 import frontEndUI.WelcomePopup;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import mathbuddy.MathBuddy;
 import mbState.MBOptionsState;
+import saverAndReader.Reader;
+import saverAndReader.SGLSaver;
+import saverAndReader.Saver;
 
 /**
  *
@@ -22,11 +26,15 @@ public class BeginObserver implements ActionListener {
     private JFrame menu;
     private JTextField IDField;
     private MathBuddy mb;
+    private Reader reader;
+    private Saver saver;
     
     public BeginObserver(JFrame menu, JTextField field, MathBuddy mb){
         this.IDField = field;
         this.menu = menu;
         this.mb = mb;
+        this.reader = new Reader();
+        this.saver = new Saver("C:\\mathbuddy");
     }
 
     @Override
@@ -35,11 +43,15 @@ public class BeginObserver implements ActionListener {
         //Do stuff
         //Advance the State
         String name = this.IDField.getText();
-        int visits = 1;
-        WelcomePopup wp = new WelcomePopup(menu, true, name, visits);
-        menu.dispose();
-        wp.setVisible(true);
-        //int visits = REESE'S METHOD
+        
+        try{
+            saver.newUser("SGL", name);
+            SGLSaver currSGL = new SGLSaver(name,"C:\\mathbuddy");
+            currSGL.login();
+            WelcomePopup wp = new WelcomePopup(menu, true, currSGL.getStudentUserName(), currSGL.getLoginCount());
+            menu.dispose();
+            wp.setVisible(true);
+        } catch (Exception ex) {System.out.println("Something happened trying to make a new user");}
         
         mb.setState(new MBOptionsState(mb));
         mb.state.update();
