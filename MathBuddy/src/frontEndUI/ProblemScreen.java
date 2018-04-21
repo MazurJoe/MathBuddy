@@ -170,6 +170,9 @@ public class ProblemScreen extends javax.swing.JFrame {
     }
     
     public double getAnswer(){
+        if(this.answer.getText().isEmpty()) {
+                return Double.MAX_VALUE;
+        }
         return Double.parseDouble(this.answer.getText());
         
     }

@@ -34,6 +34,10 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         this.LowerBound.addKeyListener(new EnterObserver(Submit));
         this.UpperBound.addKeyListener(new EnterObserver(Submit));
         this.Submit.addActionListener(al);
+        this.jRadioButton1.setSelected(true);
+        this.LowerBound.setText("1");
+        this.LowerBound.requestFocus();
+        this.UpperBound.setText("10");
     }
     
     public OptionsBundle buildOptions() {
