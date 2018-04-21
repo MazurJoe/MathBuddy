@@ -20,8 +20,6 @@ import observers.OKObserver;
  */
 public class MBOptionsMenu extends javax.swing.JFrame {
 
-    
-    ActionListener al;
 
     MathBuddy mb;
     /**
@@ -30,10 +28,9 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     public MBOptionsMenu(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new OKObserver(this,mb);
         this.LowerBound.addKeyListener(new EnterObserver(Submit));
         this.UpperBound.addKeyListener(new EnterObserver(Submit));
-        this.Submit.addActionListener(al);
+        this.Submit.addActionListener(new OKObserver(this,mb));
         this.jRadioButton1.setSelected(true);
         this.LowerBound.setText("1");
         this.LowerBound.requestFocus();

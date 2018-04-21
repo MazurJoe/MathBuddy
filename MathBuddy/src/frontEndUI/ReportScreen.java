@@ -20,8 +20,7 @@ public class ReportScreen extends javax.swing.JFrame {
     /**
      * Creates new form ProblemScreen
      */
-    ActionListener al;
-    ActionListener newSetAL;
+
     MathBuddy mb;
     
     
@@ -29,10 +28,8 @@ public class ReportScreen extends javax.swing.JFrame {
     public ReportScreen(MathBuddy mb, int numCorrect) {
         initComponents();
         this.mb = mb;
-        this.al = new ReportQuitObserver(this,mb);
-        this.quitButton.addActionListener(al);
-        this.newSetAL = new ReportResetObserver(mb, this);
-        this.newSetButton.addActionListener(this.newSetAL);
+        this.quitButton.addActionListener(new ReportQuitObserver(this,mb));
+        this.newSetButton.addActionListener(new ReportResetObserver(mb, this));
         this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
         this.jLabel1.setText("You got " + numCorrect + " right out of 10!");

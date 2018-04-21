@@ -17,8 +17,6 @@ import observers.EnterObserver;
  */
 public class MBSplash extends javax.swing.JFrame {
 
-    ActionListener al;
-    KeyListener kl;
     MathBuddy mb;
     
     
@@ -28,10 +26,8 @@ public class MBSplash extends javax.swing.JFrame {
     public MBSplash(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new BeginObserver(this, IDField, mb);
-        this.kl = new EnterObserver(beginButton);
-        this.beginButton.addActionListener(al);
-        this.IDField.addKeyListener(kl);
+        this.beginButton.addActionListener(new BeginObserver(this, IDField, mb));
+        this.IDField.addKeyListener(new EnterObserver(beginButton));
     }
     
     public String getName(){

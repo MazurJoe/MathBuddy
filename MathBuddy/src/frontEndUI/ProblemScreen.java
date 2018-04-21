@@ -28,7 +28,6 @@ import observers.ProblemsSubmitObserver;
 public class ProblemScreen extends javax.swing.JFrame {
     
     int numCorrect;
-    ActionListener quit,submit;
     MathBuddy mb;
     OptionsBundle ob;
     String[] problems;
@@ -40,10 +39,8 @@ public class ProblemScreen extends javax.swing.JFrame {
     public ProblemScreen(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.quit = new ProblemsQuitObserver(this,mb);
-        this.submit = new ProblemsSubmitObserver(this,mb);
-        this.submitButton.addActionListener(submit);
-        this.quitButton.addActionListener(quit);
+        this.submitButton.addActionListener(new ProblemsSubmitObserver(this,mb));
+        this.quitButton.addActionListener(new ProblemsQuitObserver(this,mb));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
         this.answer.addKeyListener(new EnterObserver(submitButton));
         this.problems = new String[10];
