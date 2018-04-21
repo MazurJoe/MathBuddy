@@ -7,11 +7,19 @@ import java.util.ArrayList;
 public class DoubleAddition 
 {  
     private ArrayList<Double> coeffs;
-    private int x,y,z;
+    private int y,z;
     public String[] listOfProblems = new String[10];
     public double[] listOfAnswers = new double[10];
     public DoubleAddition(int low, int high, int numOfDecimals)
     {
+        y=low;
+        z=high;
+        if (y>z)
+        {
+           int temp = y;
+           y = z;
+           z = temp;
+        }
         Random generator = new Random(System.currentTimeMillis());
         for(int k=0; k<10; k++)
         {    
@@ -20,7 +28,7 @@ public class DoubleAddition
             int j = 2;
             for(int i = 0; i < j; i++)
             {
-                coeffs.add(NumberGenerator.doubleNumGen(low,high,numOfDecimals));   
+                coeffs.add(NumberGenerator.doubleNumGen(y,z,numOfDecimals));   
             }
             ArrayList<Character> ops = new ArrayList();
             for(int i= 0; i < coeffs.size() -1; i++)
