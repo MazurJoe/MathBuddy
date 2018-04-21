@@ -28,6 +28,7 @@ public class MBSplash extends javax.swing.JFrame {
         this.mb = mb;
         this.beginButton.addActionListener(new BeginObserver(this, IDField, mb));
         this.IDField.addKeyListener(new EnterObserver(beginButton));
+        this.setLocationRelativeTo(null);
     }
     
     public String getName(){
@@ -50,6 +51,7 @@ public class MBSplash extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MathBuddy!");
+        setLocation(new java.awt.Point(0, 0));
         setName("MBSplash"); // NOI18N
         setResizable(false);
 

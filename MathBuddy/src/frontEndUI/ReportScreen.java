@@ -33,6 +33,7 @@ public class ReportScreen extends javax.swing.JFrame {
         this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
         this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
+        this.setLocationRelativeTo(null);
         
     }
 

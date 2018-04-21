@@ -26,6 +26,7 @@ public class WelcomePopup extends javax.swing.JDialog {
         initComponents();
         this.jLabel1.setText("Welcome " + name + ", this is visit #" + count);
         this.jButton1.addKeyListener(new EnterObserver(jButton1));
+        this.setLocationRelativeTo(null);
     }
 
     /**

@@ -35,6 +35,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         this.LowerBound.setText("1");
         this.LowerBound.requestFocus();
         this.UpperBound.setText("10");
+        this.setLocationRelativeTo(null);
     }
     
     public OptionsBundle buildOptions() {

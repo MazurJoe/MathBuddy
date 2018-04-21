@@ -46,6 +46,7 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
+        this.setLocationRelativeTo(null);
     }
     
 
