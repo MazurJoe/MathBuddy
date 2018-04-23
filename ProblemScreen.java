@@ -191,7 +191,6 @@ public class ProblemScreen extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        displayArea.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         displayArea.setOpaque(false);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
@@ -208,7 +207,7 @@ public class ProblemScreen extends javax.swing.JFrame {
             .addGroup(displayAreaLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         getContentPane().add(displayArea);
