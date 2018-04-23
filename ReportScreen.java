@@ -7,6 +7,7 @@ package frontEndUI;
 
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
+import observers.EnterObserver;
 import observers.ReportQuitObserver;
 import observers.ReportResetObserver;
 
@@ -19,8 +20,7 @@ public class ReportScreen extends javax.swing.JFrame {
     /**
      * Creates new form ProblemScreen
      */
-    ActionListener al;
-    ActionListener newSetAL;
+
     MathBuddy mb;
     
     
@@ -28,11 +28,12 @@ public class ReportScreen extends javax.swing.JFrame {
     public ReportScreen(MathBuddy mb, int numCorrect) {
         initComponents();
         this.mb = mb;
-        this.al = new ReportQuitObserver(this,mb);
-        this.quitButton.addActionListener(al);
-        this.newSetAL = new ReportResetObserver(mb, this);
-        this.newSetButton.addActionListener(this.newSetAL);
+        this.quitButton.addActionListener(new ReportQuitObserver(this,mb));
+        this.newSetButton.addActionListener(new ReportResetObserver(mb, this));
+        this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
+        this.quitButton.addKeyListener(new EnterObserver(quitButton));
         this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -47,9 +48,9 @@ public class ReportScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         displayArea = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         quitButton = new javax.swing.JButton();
         newSetButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,21 +60,30 @@ public class ReportScreen extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        displayArea.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        displayArea.setOpaque(false);
+
+        jLabel1.setFocusable(false);
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
         displayAreaLayout.setHorizontalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
+            .addGroup(displayAreaLayout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 95, Short.MAX_VALUE)
+            .addGroup(displayAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         getContentPane().add(displayArea);
-        displayArea.setBounds(110, 140, 560, 100);
+        displayArea.setBounds(140, 140, 610, 128);
 
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -82,19 +92,15 @@ public class ReportScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(quitButton);
-        quitButton.setBounds(660, 440, 105, 25);
+        quitButton.setBounds(640, 430, 105, 25);
 
         newSetButton.setText("New set");
         getContentPane().add(newSetButton);
-        newSetButton.setBounds(510, 440, 105, 25);
-
-        jLabel1.setFocusable(false);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(46, 341, 452, 64);
+        newSetButton.setBounds(480, 430, 105, 25);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddy Result Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(1, 0, 970, 510);
+        jLabel2.setBounds(0, 0, 890, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -7,19 +7,20 @@ package frontEndUI;
 
 import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import mathbuddy.MathBuddy;
-import observers.OptionsOKObserver;
+import observers.EnterObserver;
+import observers.OKObserver;
 
 /**
  *
- * @author John Rosser
+ * @author John Rosser 
  */
 public class MBOptionsMenu extends javax.swing.JFrame {
 
-    
-    ActionListener al;
+
     MathBuddy mb;
     /**
      * Creates new form MBOptionsMenu
@@ -27,8 +28,14 @@ public class MBOptionsMenu extends javax.swing.JFrame {
     public MBOptionsMenu(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new OptionsOKObserver(this,mb);
-        this.Submit.addActionListener(al);
+        this.LowerBound.addKeyListener(new EnterObserver(Submit));
+        this.UpperBound.addKeyListener(new EnterObserver(Submit));
+        this.Submit.addActionListener(new OKObserver(this,mb));
+        this.jRadioButton1.setSelected(true);
+        this.LowerBound.setText("1");
+        this.LowerBound.requestFocus();
+        this.UpperBound.setText("10");
+        this.setLocationRelativeTo(null);
     }
     
     public OptionsBundle buildOptions() {
@@ -83,17 +90,23 @@ public class MBOptionsMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Submit);
-        Submit.setBounds(673, 490, 80, 25);
+        Submit.setBounds(653, 480, 70, 25);
 
         jPanel1.setOpaque(false);
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jRadioButton1.setText("Addition");
         jRadioButton1.setOpaque(false);
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jRadioButton2.setText("Multiplication");
         jRadioButton2.setOpaque(false);
 
         buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jRadioButton3.setText("Subtraction");
         jRadioButton3.setOpaque(false);
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +115,8 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(jRadioButton4);
+        jRadioButton4.setFont(new java.awt.Font("Tahoma", 0, 1)); // NOI18N
+        jRadioButton4.setText("Division");
         jRadioButton4.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -111,28 +126,28 @@ public class MBOptionsMenu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton1)
                     .addComponent(jRadioButton4)
                     .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton1))
-                .addContainerGap(137, Short.MAX_VALUE))
+                    .addComponent(jRadioButton3))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(44, 44, 44)
                 .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jRadioButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton4)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(130, 200, 170, 160);
+        jPanel1.setBounds(130, 170, 159, 269);
 
         jPanel2.setOpaque(false);
 
@@ -159,31 +174,27 @@ public class MBOptionsMenu extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(isIntegers)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(UpperBound, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LowerBound, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(LowerBound, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpperBound, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
                 .addComponent(LowerBound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(UpperBound, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(34, 34, 34)
                 .addComponent(isIntegers)
-                .addContainerGap())
+                .addGap(0, 123, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(440, 160, 182, 269);
+        jPanel2.setBounds(450, 270, 194, 269);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddy Options Background.jpg"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(-10, 0, 800, 560);
+        jLabel4.setBounds(0, -30, 870, 620);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -6,8 +6,10 @@
 package frontEndUI;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import mathbuddy.MathBuddy;
 import observers.BeginObserver;
+import observers.EnterObserver;
 
 /**
  *
@@ -15,7 +17,6 @@ import observers.BeginObserver;
  */
 public class MBSplash extends javax.swing.JFrame {
 
-    ActionListener al;
     MathBuddy mb;
     
     
@@ -25,8 +26,9 @@ public class MBSplash extends javax.swing.JFrame {
     public MBSplash(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.al = new BeginObserver(this, IDField, mb);
-        this.beginButton.addActionListener(al);
+        this.beginButton.addActionListener(new BeginObserver(this, IDField, mb));
+        this.IDField.addKeyListener(new EnterObserver(beginButton));
+        this.setLocationRelativeTo(null);
     }
     
     public String getName(){
@@ -50,28 +52,29 @@ public class MBSplash extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MathBuddy!");
+        setLocation(new java.awt.Point(0, 0));
         setName("MBSplash"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
         getContentPane().setLayout(null);
         getContentPane().add(IDField);
-        IDField.setBounds(310, 260, 193, 30);
+        IDField.setBounds(280, 250, 193, 30);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name:");
         jLabel1.setFocusable(false);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(220, 260, 80, 30);
+        jLabel1.setBounds(170, 250, 100, 30);
 
         beginButton.setText("Begin!");
         getContentPane().add(beginButton);
-        beginButton.setBounds(510, 260, 80, 30);
+        beginButton.setBounds(480, 250, 90, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddyLogo.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 800, 550);
+        jLabel2.setBounds(0, 0, 810, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

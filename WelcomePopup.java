@@ -5,6 +5,8 @@
  */
 package frontEndUI;
 
+import observers.EnterObserver;
+
 /**
  *
  * @author John Rosser
@@ -23,6 +25,8 @@ public class WelcomePopup extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.jLabel1.setText("Welcome " + name + ", this is visit #" + count);
+        this.jButton1.addKeyListener(new EnterObserver(jButton1));
+        this.setLocationRelativeTo(null);
     }
 
     /**

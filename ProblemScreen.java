@@ -7,16 +7,17 @@ package frontEndUI;
 
 import humans.OptionsBundle;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import mathbuddy.DoubleAddition;
 import mathbuddy.DoubleDivision;
-import mathbuddy.DoubleMultiplication;
+import mathbuddy.DoubleMultiplication; 
 import mathbuddy.DoubleSubtraction;
 import mathbuddy.IntegerAddition;
 import mathbuddy.IntegerDivision;
 import mathbuddy.IntegerMultiplication;
 import mathbuddy.IntegerSubtraction;
 import mathbuddy.MathBuddy;
-import mbtimer.MBStopWatch;
+import observers.EnterObserver;
 import observers.ProblemsQuitObserver;
 import observers.ProblemsSubmitObserver;
 
@@ -27,9 +28,7 @@ import observers.ProblemsSubmitObserver;
 public class ProblemScreen extends javax.swing.JFrame {
     
     int numCorrect;
-    ActionListener quit,submit;
     MathBuddy mb;
-    MBStopWatch sw;
     OptionsBundle ob;
     String[] problems;
     double[] answers;
@@ -40,14 +39,16 @@ public class ProblemScreen extends javax.swing.JFrame {
     public ProblemScreen(MathBuddy mb) {
         initComponents();
         this.mb = mb;
-        this.quit = new ProblemsQuitObserver(this,mb);
-        this.submit = new ProblemsSubmitObserver(this,mb);
-        this.submitButton.addActionListener(submit);
-        this.quitButton.addActionListener(quit);
+        this.submitButton.addActionListener(new ProblemsSubmitObserver(this,mb));
+        this.quitButton.addActionListener(new ProblemsQuitObserver(this,mb));
+        this.quitButton.addKeyListener(new EnterObserver(quitButton));
+        this.answer.addKeyListener(new EnterObserver(submitButton));
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
+        this.setLocationRelativeTo(null);
     }
+    
 
     public void setObAndMakeProblems(OptionsBundle ob) {
         this.ob = ob;
@@ -59,7 +60,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                     answers[i] = obj.listOfAnswers[i];
                 }
                 //answers = obj.listOfAnswers;
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Subtraction")){
@@ -68,7 +69,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Multiplication")){
@@ -77,7 +78,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Division")){
@@ -86,7 +87,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }                        
         }
@@ -97,7 +98,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Subtraction")){
@@ -106,7 +107,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Multiplication")){
@@ -115,7 +116,7 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }
             if(ob.getOperation().equals("Division")){
@@ -124,22 +125,26 @@ public class ProblemScreen extends javax.swing.JFrame {
                 for(int i = 0; i < obj.listOfAnswers.length; i++){
                     answers[i] = obj.listOfAnswers[i];
                 }
-                this.jTextField2.setText(problems[0]);
+                this.problemArea.setText(problems[0]);
                 return;
             }  
         }
     }
     
     public void updateProblem(int k){
-        this.jTextField2.setText(problems[k]);
+        this.problemArea.setText(problems[k]);
     }
     
     public void noMoreProblems(){
-        this.jTextField2.setText("All done");
+        this.problemArea.setText("All done");
     }
 
     public String[] getProblems() {
         return problems;
+    }
+    
+    public JButton getQuitButton() {
+        return  this.quitButton;
     }
 
     public double getCurrAnswers(int counter) {
@@ -163,6 +168,9 @@ public class ProblemScreen extends javax.swing.JFrame {
     }
     
     public double getAnswer(){
+        if(this.answer.getText().isEmpty()) {
+                return Double.MAX_VALUE;
+        }
         return Double.parseDouble(this.answer.getText());
         
     }
@@ -177,11 +185,10 @@ public class ProblemScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         displayArea = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        problemArea = new javax.swing.JLabel();
         answer = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -193,43 +200,41 @@ public class ProblemScreen extends javax.swing.JFrame {
 
         displayArea.setOpaque(false);
 
+        problemArea.setOpaque(true);
+
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
         displayAreaLayout.setHorizontalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103)
+                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         getContentPane().add(displayArea);
-        displayArea.setBounds(180, 70, 440, 130);
+        displayArea.setBounds(150, 70, 520, 128);
         getContentPane().add(answer);
-        answer.setBounds(600, 380, 133, 22);
+        answer.setBounds(580, 390, 133, 22);
 
         submitButton.setText("Submit");
         getContentPane().add(submitButton);
-        submitButton.setBounds(493, 380, 90, 25);
+        submitButton.setBounds(480, 390, 80, 25);
 
         quitButton.setText("Quit");
         getContentPane().add(quitButton);
-        quitButton.setBounds(663, 490, 100, 25);
-
-        jTextField1.setFocusable(false);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(50, 380, 109, 22);
+        quitButton.setBounds(620, 470, 73, 25);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/Mathbuddy Problem Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 800, 550);
+        jLabel2.setBounds(0, -10, 820, 560);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -242,8 +247,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     private javax.swing.JTextField answer;
     private javax.swing.JPanel displayArea;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel problemArea;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
