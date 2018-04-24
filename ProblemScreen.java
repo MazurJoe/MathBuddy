@@ -6,6 +6,7 @@
 package frontEndUI;
 
 import humans.OptionsBundle;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import mathbuddy.DoubleAddition;
@@ -46,6 +47,7 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
         this.setLocationRelativeTo(null);
     }
     
@@ -196,11 +198,14 @@ public class ProblemScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
+        setSize(new java.awt.Dimension(800, 580));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
 
-        problemArea.setOpaque(true);
+        problemArea.setFont(new java.awt.Font("KG Ten Thousand Reasons", 0, 30)); // NOI18N
+        problemArea.setForeground(new java.awt.Color(255, 255, 255));
+        problemArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
@@ -209,14 +214,14 @@ public class ProblemScreen extends javax.swing.JFrame {
             .addGroup(displayAreaLayout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, displayAreaLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         getContentPane().add(displayArea);
@@ -234,7 +239,7 @@ public class ProblemScreen extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/Mathbuddy Problem Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -10, 820, 560);
+        jLabel2.setBounds(0, 0, 820, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
