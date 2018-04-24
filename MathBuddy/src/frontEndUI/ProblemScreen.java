@@ -198,13 +198,14 @@ public class ProblemScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
-        setSize(new java.awt.Dimension(800, 570));
+        setSize(new java.awt.Dimension(800, 580));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
 
+        problemArea.setFont(new java.awt.Font("KG Ten Thousand Reasons", 0, 30)); // NOI18N
+        problemArea.setForeground(new java.awt.Color(255, 255, 255));
         problemArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        problemArea.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
@@ -217,28 +218,28 @@ public class ProblemScreen extends javax.swing.JFrame {
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, displayAreaLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         getContentPane().add(displayArea);
         displayArea.setBounds(150, 70, 520, 128);
         getContentPane().add(answer);
-        answer.setBounds(580, 390, 133, 20);
+        answer.setBounds(580, 390, 133, 22);
 
         submitButton.setText("Submit");
         getContentPane().add(submitButton);
-        submitButton.setBounds(480, 390, 80, 23);
+        submitButton.setBounds(480, 390, 80, 25);
 
         quitButton.setText("Quit");
         getContentPane().add(quitButton);
-        quitButton.setBounds(620, 470, 73, 23);
+        quitButton.setBounds(620, 470, 73, 25);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/Mathbuddy Problem Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, -10, 820, 560);
+        jLabel2.setBounds(0, 0, 820, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

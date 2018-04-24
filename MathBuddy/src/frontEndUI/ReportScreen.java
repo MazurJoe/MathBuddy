@@ -60,14 +60,15 @@ public class ReportScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
-        setSize(new java.awt.Dimension(850, 580));
+        setSize(new java.awt.Dimension(800, 580));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
 
+        jLabel1.setFont(new java.awt.Font("KG Ten Thousand Reasons", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setFocusable(false);
-        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
@@ -87,7 +88,7 @@ public class ReportScreen extends javax.swing.JFrame {
         );
 
         getContentPane().add(displayArea);
-        displayArea.setBounds(140, 140, 610, 126);
+        displayArea.setBounds(140, 140, 610, 128);
 
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,16 +97,16 @@ public class ReportScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(quitButton);
-        quitButton.setBounds(640, 430, 105, 23);
+        quitButton.setBounds(640, 430, 105, 25);
 
         newSetButton.setText("New set");
         getContentPane().add(newSetButton);
-        newSetButton.setBounds(480, 430, 105, 23);
+        newSetButton.setBounds(480, 430, 105, 25);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddy Result Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 790, 540);
+        jLabel2.setBounds(0, 0, 800, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
