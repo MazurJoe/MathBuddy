@@ -6,6 +6,7 @@
 package frontEndUI;
 
 import humans.OptionsBundle;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import mathbuddy.DoubleAddition;
@@ -46,6 +47,7 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
         this.setLocationRelativeTo(null);
     }
     

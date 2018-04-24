@@ -6,6 +6,7 @@
 package frontEndUI;
 
 import java.awt.Frame;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import mathbuddy.MathBuddy;
 import mbState.MBOptionsState;
@@ -25,6 +26,7 @@ public class WelcomePopup extends javax.swing.JDialog {
     public WelcomePopup(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
     }
     
     public WelcomePopup(java.awt.Frame parent, boolean modal,String name, int count, MathBuddy mb) {

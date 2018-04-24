@@ -5,8 +5,10 @@
  */
 package frontEndUI;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import javax.swing.ImageIcon;
 import mathbuddy.MathBuddy;
 import observers.BeginObserver;
 import observers.EnterObserver;
@@ -29,6 +31,7 @@ public class MBSplash extends javax.swing.JFrame {
         this.beginButton.addActionListener(new BeginObserver(this, IDField, mb));
         this.IDField.addKeyListener(new EnterObserver(beginButton));
         this.setLocationRelativeTo(null);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
     }
     
     public String getName(){

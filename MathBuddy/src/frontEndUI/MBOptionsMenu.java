@@ -6,6 +6,7 @@
 package frontEndUI;
 
 import humans.OptionsBundle;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.Enumeration;
@@ -35,6 +36,7 @@ public class MBOptionsMenu extends javax.swing.JFrame {
         this.LowerBound.setText("1");
         this.LowerBound.requestFocus();
         this.UpperBound.setText("10");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
         this.setLocationRelativeTo(null);
     }
     

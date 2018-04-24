@@ -5,6 +5,7 @@
  */
 package frontEndUI;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
 import observers.EnterObserver;
@@ -33,6 +34,7 @@ public class ReportScreen extends javax.swing.JFrame {
         this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
         this.jLabel1.setText("" + numCorrect + " correct out of 10!");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
         this.setLocationRelativeTo(null);
         
     }
