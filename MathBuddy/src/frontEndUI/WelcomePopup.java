@@ -5,6 +5,10 @@
  */
 package frontEndUI;
 
+import java.awt.Frame;
+import javax.swing.JFrame;
+import mathbuddy.MathBuddy;
+import mbState.MBOptionsState;
 import observers.EnterObserver;
 
 /**
@@ -13,6 +17,8 @@ import observers.EnterObserver;
  */
 public class WelcomePopup extends javax.swing.JDialog {
 
+    
+    Frame parent;
     /**
      * Creates new form WelcomePopup
      */
@@ -21,11 +27,13 @@ public class WelcomePopup extends javax.swing.JDialog {
         initComponents();
     }
     
-    public WelcomePopup(java.awt.Frame parent, boolean modal,String name, int count) {
+    public WelcomePopup(java.awt.Frame parent, boolean modal,String name, int count, MathBuddy mb) {
         super(parent, modal);
         initComponents();
         this.jLabel1.setText("Welcome " + name + ", this is visit #" + count);
         this.jButton1.addKeyListener(new EnterObserver(jButton1));
+        this.parent = parent;
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -49,6 +57,7 @@ public class WelcomePopup extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -56,28 +65,28 @@ public class WelcomePopup extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        parent.dispose();
         this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 

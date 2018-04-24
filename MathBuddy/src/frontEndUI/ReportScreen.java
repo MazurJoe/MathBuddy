@@ -32,7 +32,8 @@ public class ReportScreen extends javax.swing.JFrame {
         this.newSetButton.addActionListener(new ReportResetObserver(mb, this));
         this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
-        this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
+        this.jLabel1.setText("" + numCorrect + " correct out of 10!");
+        this.setLocationRelativeTo(null);
         
     }
 
@@ -50,32 +51,41 @@ public class ReportScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         quitButton = new javax.swing.JButton();
         newSetButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Math Buddy!");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
+        setSize(new java.awt.Dimension(850, 580));
+        getContentPane().setLayout(null);
 
-        displayArea.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        displayArea.setOpaque(false);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setFocusable(false);
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
         displayAreaLayout.setHorizontalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(114, 114, 114)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(displayAreaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
+
+        getContentPane().add(displayArea);
+        displayArea.setBounds(140, 140, 610, 126);
 
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,32 +93,17 @@ public class ReportScreen extends javax.swing.JFrame {
                 quitButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(quitButton);
+        quitButton.setBounds(640, 430, 105, 23);
 
         newSetButton.setText("New set");
+        getContentPane().add(newSetButton);
+        newSetButton.setBounds(480, 430, 105, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(newSetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(quitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(displayArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(displayArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quitButton)
-                    .addComponent(newSetButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddy Result Background.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 790, 540);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -125,6 +120,7 @@ public class ReportScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel displayArea;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton newSetButton;
     private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables

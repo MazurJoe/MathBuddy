@@ -28,6 +28,7 @@ public class MBSplash extends javax.swing.JFrame {
         this.mb = mb;
         this.beginButton.addActionListener(new BeginObserver(this, IDField, mb));
         this.IDField.addKeyListener(new EnterObserver(beginButton));
+        this.setLocationRelativeTo(null);
     }
     
     public String getName(){
@@ -47,41 +48,33 @@ public class MBSplash extends javax.swing.JFrame {
         IDField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         beginButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MathBuddy!");
+        setLocation(new java.awt.Point(0, 0));
         setName("MBSplash"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
+        getContentPane().setLayout(null);
+        getContentPane().add(IDField);
+        IDField.setBounds(280, 250, 193, 30);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Name:");
         jLabel1.setFocusable(false);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(170, 250, 100, 30);
 
         beginButton.setText("Begin!");
+        getContentPane().add(beginButton);
+        beginButton.setBounds(480, 250, 90, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(beginButton)
-                .addContainerGap(99, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(IDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beginButton))
-                .addContainerGap(169, Short.MAX_VALUE))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddyLogo.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 810, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,5 +88,6 @@ public class MBSplash extends javax.swing.JFrame {
     private javax.swing.JTextField IDField;
     private javax.swing.JButton beginButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

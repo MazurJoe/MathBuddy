@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import mathbuddy.DoubleAddition;
 import mathbuddy.DoubleDivision;
-import mathbuddy.DoubleMultiplication;
+import mathbuddy.DoubleMultiplication; 
 import mathbuddy.DoubleSubtraction;
 import mathbuddy.IntegerAddition;
 import mathbuddy.IntegerDivision;
@@ -46,6 +46,7 @@ public class ProblemScreen extends javax.swing.JFrame {
         this.problems = new String[10];
         this.answers = new double[10];
         numCorrect = 0;
+        this.setLocationRelativeTo(null);
     }
     
 
@@ -188,14 +189,20 @@ public class ProblemScreen extends javax.swing.JFrame {
         answer = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Math Buddy!");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
+        setSize(new java.awt.Dimension(850, 580));
+        getContentPane().setLayout(null);
 
-        displayArea.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        displayArea.setOpaque(false);
+
+        problemArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        problemArea.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
@@ -211,51 +218,25 @@ public class ProblemScreen extends javax.swing.JFrame {
             .addGroup(displayAreaLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
+
+        getContentPane().add(displayArea);
+        displayArea.setBounds(150, 70, 520, 128);
+        getContentPane().add(answer);
+        answer.setBounds(580, 390, 133, 20);
 
         submitButton.setText("Submit");
+        getContentPane().add(submitButton);
+        submitButton.setBounds(480, 390, 80, 23);
 
         quitButton.setText("Quit");
+        getContentPane().add(quitButton);
+        quitButton.setBounds(620, 470, 73, 23);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Answer:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(displayArea, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 295, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(quitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(submitButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(answer, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(displayArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(answer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(submitButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(quitButton)
-                .addGap(20, 20, 20))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/Mathbuddy Problem Background.jpg"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, -10, 820, 560);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,7 +248,7 @@ public class ProblemScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField answer;
     private javax.swing.JPanel displayArea;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel problemArea;
     private javax.swing.JButton quitButton;
     private javax.swing.JButton submitButton;
