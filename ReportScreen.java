@@ -5,6 +5,7 @@
  */
 package frontEndUI;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import mathbuddy.MathBuddy;
 import observers.EnterObserver;
@@ -32,7 +33,8 @@ public class ReportScreen extends javax.swing.JFrame {
         this.newSetButton.addActionListener(new ReportResetObserver(mb, this));
         this.newSetButton.addKeyListener(new EnterObserver(newSetButton));
         this.quitButton.addKeyListener(new EnterObserver(quitButton));
-        this.jLabel1.setText("You got " + numCorrect + " right out of 10!");
+        this.jLabel1.setText("" + numCorrect + " correct out of 10!");
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/frontEndUI/Math Buddy Window Icon.jpg")));
         this.setLocationRelativeTo(null);
         
     }
@@ -58,12 +60,15 @@ public class ReportScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
+        setSize(new java.awt.Dimension(800, 580));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
 
+        jLabel1.setFont(new java.awt.Font("KG Ten Thousand Reasons", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setFocusable(false);
-        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
         displayArea.setLayout(displayAreaLayout);
@@ -98,9 +103,10 @@ public class ReportScreen extends javax.swing.JFrame {
         getContentPane().add(newSetButton);
         newSetButton.setBounds(480, 430, 105, 25);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/MathBuddy Result Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 890, 540);
+        jLabel2.setBounds(0, 0, 800, 550);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
