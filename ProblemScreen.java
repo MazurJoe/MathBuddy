@@ -196,12 +196,10 @@ public class ProblemScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
-        setSize(new java.awt.Dimension(850, 580));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
 
-        problemArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         problemArea.setOpaque(true);
 
         javax.swing.GroupLayout displayAreaLayout = new javax.swing.GroupLayout(displayArea);
@@ -224,15 +222,15 @@ public class ProblemScreen extends javax.swing.JFrame {
         getContentPane().add(displayArea);
         displayArea.setBounds(150, 70, 520, 128);
         getContentPane().add(answer);
-        answer.setBounds(580, 390, 133, 20);
+        answer.setBounds(580, 390, 133, 22);
 
         submitButton.setText("Submit");
         getContentPane().add(submitButton);
-        submitButton.setBounds(480, 390, 80, 23);
+        submitButton.setBounds(480, 390, 80, 25);
 
         quitButton.setText("Quit");
         getContentPane().add(quitButton);
-        quitButton.setBounds(620, 470, 73, 23);
+        quitButton.setBounds(620, 470, 73, 25);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frontEndUI/Mathbuddy Problem Background.jpg"))); // NOI18N
         getContentPane().add(jLabel2);

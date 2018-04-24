@@ -48,13 +48,19 @@ public class BeginObserver implements ActionListener {
             saver.newUser("SGL", name);
             SGLSaver currSGL = new SGLSaver(name,"C:\\mathbuddy");
             currSGL.login();
-            WelcomePopup wp = new WelcomePopup(menu, true, currSGL.getStudentUserName(), currSGL.getLoginCount());
-            menu.dispose();
+            WelcomePopup wp = new WelcomePopup(menu, true, currSGL.getStudentUserName(), currSGL.getLoginCount(),mb);
+            //menu.dispose();
             wp.setVisible(true);
         } catch (Exception ex) {System.out.println("Something happened trying to make a new user");}
         
         mb.setState(new MBOptionsState(mb));
         mb.state.update();
     }
+
+    public MathBuddy getMb() {
+        return mb;
+    }
+    
+    
     
 }
