@@ -198,7 +198,7 @@ public class ProblemScreen extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(800, 580));
         setResizable(false);
-        setSize(new java.awt.Dimension(850, 580));
+        setSize(new java.awt.Dimension(800, 570));
         getContentPane().setLayout(null);
 
         displayArea.setOpaque(false);
@@ -213,7 +213,7 @@ public class ProblemScreen extends javax.swing.JFrame {
             .addGroup(displayAreaLayout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addComponent(problemArea, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         displayAreaLayout.setVerticalGroup(
             displayAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
